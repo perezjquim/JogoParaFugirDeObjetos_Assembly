@@ -79,7 +79,7 @@ JMP VarrerDisplay
 ; Instruções do programa principal
 CSEG AT 050h
 Principal:
-    MOV SP, #100			        ; Endereço inicial da stack pointer
+    MOV SP, #STACK_POINTER_INICIAL			        ; Endereço inicial da stack pointer
     MOV NivelAtual, #NIVEL_INICIAL			; Imagem inicial
     MOV TempoObstaculos, #0
     MOV LinhaAtual, #0			; Mostrar a primeira linha no display
