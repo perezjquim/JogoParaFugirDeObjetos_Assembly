@@ -12,11 +12,12 @@ DisplayX EQU P2
 DisplayY EQU P1
 ;*******************************************************************************
 ; Constantes auxiliares (microcontrolador)
-TEMPO_HIGH EQU 0x3C	 								; Byte mais significativo do timer 0 - 50 ms (12MHz)
-TEMPO_LOW EQU 0xAF	 									; Byte menos significativo do timer 0 - 50 ms (12MHz)
+STACK_POINTER_INICIAL EQU 100
+TEMPO_T0_HIGH EQU 0x3C	 								; Byte mais significativo do timer 0 - 50 ms (12MHz)
+TEMPO_T0_LOW EQU 0xAF	 									; Byte menos significativo do timer 0 - 50 ms (12MHz)
 TEMPO_T1 EQU 0x70	   									; 0x70 Tempo do timer 1 - 112 us (12MHz)
 VAZIO EQU 0xFF												; Porta vazia (tudo desligado)
-INTERRUPCOES_ESTADO_INICIAL EQU 143		; Estado das interrupções ao ser corrido o programa
+INTERRUPCOES_SETUP EQU 143		; Estado das interrupções ao ser corrido o programa
 ;*******************************************************************************
 ;	Constantes auxiliares (jogo)
 IMAGEM_GAMEOVER EQU 5
@@ -78,7 +79,7 @@ JMP VarrerDisplay
 ; Instruções do programa principal
 CSEG AT 050h
 Principal:
-    MOV SP, #100			; Endereço inicial da stack pointer
+    MOV SP, #STACK_POINTER_INICIAL			        ; Endereço inicial da stack pointer
     MOV NivelAtual, #NIVEL_INICIAL			; Imagem inicial
     MOV TempoObstaculos, #0
     MOV LinhaAtual, #0			; Mostrar a primeira linha no display
@@ -87,12 +88,12 @@ Principal:
 
     LigarInterrupcoes:
         MOV TMOD, #00100001b;		; Timer 0 de 16 bits
-        MOV TH0, #TEMPO_HIGH;		; Timer 0 = 50 ms
-        MOV TL0, #TEMPO_LOW; 
+        MOV TH0, #TEMPO_T0_HIGH;		; Timer 0 = 50 ms
+        MOV TL0, #TEMPO_T0_LOW; 
         MOV TH1, #TEMPO_T1;			; Timer 1 = 112 us
         MOV TL1, #TEMPO_T1;
         MOV IP, #0		; Não altera as prioridades
-        MOV IE, #INTERRUPCOES_ESTADO_INICIAL		; Activa as interrupções:
+        MOV IE, #INTERRUPCOES_SETUP		; Activa as interrupções:
         SETB IT0			; Ext0 detectada na transição descendente
         SETB IT1			; Ext1 detectada na transição descendente
         SETB TR0			; Inicia timer 0
@@ -210,8 +211,8 @@ VerificarObstaculos:
 	PUSH 1
     PUSH B
     
-    MOV TH0, #TEMPO_HIGH;		; Timer 0 = 50 ms
-    MOV TL0, #TEMPO_LOW;		; Verifica se já passou 1 segundo
+    MOV TH0, #TEMPO_T0_HIGH;		; Timer 0 = 50 ms
+    MOV TL0, #TEMPO_T0_LOW;		; Verifica se já passou 1 segundo
     DJNZ TempoObstaculos, fimVerificarObstaculos
     
     ReinicializarDificuldade:
