@@ -128,6 +128,10 @@ Principal:
 ;*******************************************************************************
 ;*******************************************************************************
 
+;*******************************************************************************	
+;*******************************************************************************
+; Rotina para desenhar uma imagem no display (obstáculos ou imagem de gameover ou vitória)
+;*******************************************************************************
 DesenharNovaImagem:
     PUSH ACC																	; Guarda o conteúdo do registo ACC
     PUSH B																			; Guarda o conteúdo do registo B
@@ -142,8 +146,7 @@ DesenharNovaImagem:
 	
     MOV R0, #ImagemDisplay										; Aponta para a imagem apresentada no display
     MOV R1, A																	; Guarda o deslocamento
-    MOV R2, #NR_LINHAS												; Número de linhas do display
-    DEC R2																			; Decrementa o número de linhas (visto que não queremos que seja feito o desenho na última linha - linha do jogador)
+    MOV R2, #POS_JOGADOR										; Número de linhas do display
     MOV DPTR, #Imagens												; Endereço base das imagens
     
 	; Ciclo para desenhar no display
@@ -190,7 +193,6 @@ MoverJogadorEsquerda:
     MoverEsquerda:
         RL A																					; Roda para a esquerda o jogador
         MOV @R0,A																		; Atualiza a posição do jogador
-		
     FimMoverJogadorEsquerda:
         POP 0																				; Repõe o conteúdo do registo R0
         POP B																				; Repõe o conteúdo do registo B
@@ -214,7 +216,7 @@ MoverJogadorDireita:
 	
 	; Caso contrário,
 	; Não faz mais nada nesta rotina
-    JMP FimMoverJogadoDireita
+    JMP FimMoverJogadorDireita
     
     MoverDireita:
         RR A																					; Roda para a direita o jogador
@@ -236,6 +238,7 @@ VerificarObstaculos:
     PUSH ACC																		; Guarda o conteúdo do registo ACC
 	PUSH 0																				; Guarda o conteúdo do registo R0
 	PUSH 1																				; Guarda o conteúdo do registo R1
+	PUSH 2
     PUSH B																				; Guarda o conteúdo do registo B
     
     MOV TH0, #TEMPO_T0_HIGH										; Reinicializa o timer 0
@@ -274,12 +277,66 @@ VerificarObstaculos:
 			DEC VidasRestantes
 
 	MoverObstaculos:
-		;;;;;;;;;;;;;;;;
-		;;;;;;;;;;;;;;;
-		;;;;;;;;;;;;;;
+		MOV A, #POS_JOGADOR             ;i = POS_JOGADOR -1
+		DEC A
+		
+		CicloMoverObstaculos:
+			MOV B, ObstaculosInicio
+			CJNE A, B, MoverObstaculosBaixo ; (i != ObstaculosInicio)?
+			JMP VerificaObstaculosInicio
+		
+            MoverObstaculosBaixo:          
+                MOV R1, A
+                
+                MOV A, #ImagemDisplay
+                ADD A, R1
+                ;ImagemDisplay[i]
+                
+                MOV B, A
+                DEC B
+                ;ImagemDisplay[i-1]
+                
+                MOV R2, A
+                MOV R0, B
+                MOV A, @R0
+                ;Valor de ImagemDisplay[i-1]
+                
+                MOV B, R2
+                MOV R0, B
+                ;MOV R0, R2
+                
+                MOV @R0, A
+            
+        
+                MOV A, R1
+                DEC A ;i--
+                
+                JMP CicloMoverObstaculos
+
+        VerificaObstaculosInicio:
+            MOV A, ObstaculosInicio
+             
+            MOV B, #NR_LINHAS
+            DEC B
+             
+            CJNE A, B, IncrementaObstaculosInicio ; (ObstaculosInicio != NR_LINHAS - 1) ?
+            JMP FimVerificarObstaculos
+    
+            IncrementaObstaculosInicio:
+                MOV A, #ImagemDisplay
+                ADD A, ObstaculosInicio
+                MOV R0, A
+                 
+                MOV A, #LINHA_VAZIA
+                 
+                MOV @R0, A         ;ImagemDisplay[ObstaculosInicio] = LINHA_VAZIA
+                MOV A, @R0
+                 
+                INC ObstaculosInicio   ;ObstaculosInicio++
 		
 FimVerificarObstaculos:
     POP B																				; Repõe o conteúdo do registo B
+	POP 2
     POP 1																				; Repõe o conteúdo do registo R1
     POP 0																				; Repõe o conteúdo do registo R0
     POP ACC																			; Repõe o conteúdo do registo ACC

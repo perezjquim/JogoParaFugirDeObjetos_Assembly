@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     1
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -28,178 +28,178 @@ LOC  OBJ            LINE     SOURCE
 
   00B0                10     INPUT EQU P3
 
-  00A0                11     DisplayX EQU P2
+                      11     ;*******************************************************************************
 
-  0090                12     DisplayY EQU P1
+                      12     ; Constantes auxiliares (microcontrolador)
 
-                      13     ;*******************************************************************************
-
-                      14     ; Constantes auxiliares (microcontrolador)
-
-  0064                15     STACK_POINTER_INICIAL EQU 100                                           ; Posição inicial d
+  0064                13     STACK_POINTER_INICIAL EQU 100                                           ; Posição inicial d
                              a stack pointer
 
-  003C                16     TEMPO_T0_HIGH EQU 0x3C                                                                  ; B
+  003C                14     TEMPO_T0_HIGH EQU 0x3C                                                                  ; B
                              yte mais significativo do timer 0 - 50 ms (12MHz)
 
-  00AF                17     TEMPO_T0_LOW EQU 0xAF                                                                      
+  00AF                15     TEMPO_T0_LOW EQU 0xAF                                                                      
                                   ; Byte menos significativo do timer 0 - 50 ms (12MHz)
 
-  0070                18     TEMPO_T1 EQU 0x70                                                                          
+  0070                16     TEMPO_T1 EQU 0x70                                                                          
                                                   ; 0x70 Tempo do timer 1 - 112 us (12MHz)
 
-  00FF                19     VAZIO EQU 0xFF                                                                             
+  00FF                17     VAZIO EQU 0xFF                                                                             
                                                                   ; Porta vazia (tudo desligado)
 
-  008F                20     INTERRUPCOES_SETUP EQU 143                                              ; Estado das interr
+  008F                18     INTERRUPCOES_SETUP EQU 143                                              ; Estado das interr
                              upções ao ser corrido o programa
 
-                      21     ;*******************************************************************************
+                      19     ;*******************************************************************************
 
-                      22     ;       Constantes auxiliares (jogo)
+                      20     ;       Constantes auxiliares (jogo)
 
-  0005                23     IMAGEM_GAMEOVER EQU 5                                                                   ; I
+  0005                21     IMAGEM_GAMEOVER EQU 5                                                                   ; I
                              D da imagem do gameover
 
-  0006                24     IMAGEM_VICTORY EQU 6                                                                       
+  0006                22     IMAGEM_VICTORY EQU 6                                                                       
                                           ; ID da imagem da vitória
 
-  0007                25     NR_IMAGENS EQU 7                                                                           
+  0007                23     NR_IMAGENS EQU 7                                                                           
                                                           ; Número de imagens
 
-  0007                26     NR_LINHAS EQU 7                                                                            
+  0007                24     NR_LINHAS EQU 7                                                                            
                                                           ; Número total de linhas
 
-  0006                27     POS_JOGADOR EQU 6                                                                          
+  0006                25     POS_JOGADOR EQU 6                                                                          
                                                   ; Linha do jogador (última linha)
 
-  0004                28     POS_JOGADOR_INICIAL EQU 4                                                               ; P
+  0004                26     POS_JOGADOR_INICIAL EQU 4                                                               ; P
                              osição inicial do jogador (no meio da linha)
 
-  00FE                29     LINHAATIVA_INICIAL EQU 11111110b                                        ; Seleção da primei
+  00FE                27     LINHAATIVA_INICIAL EQU 11111110b                                        ; Seleção da primei
                              ra linha
 
-  0001                30     NIVEL_INICIAL EQU 1                                                                        
+  0001                28     NIVEL_INICIAL EQU 1                                                                        
                                                   ; Nível inicial (nível 1)
 
-  0004                31     VIDAS_INICIAL EQU 4                                                                        
+  0004                29     VIDAS_INICIAL EQU 4                                                                        
                                                   ; Nº de vidas para o jogador (3 vidas)
 
-  0014                32     DIFICULDADE1 EQU 20                                                                        
+  0014                30     DIFICULDADE1 EQU 20                                                                        
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  0012                33     DIFICULDADE2 EQU 18                                                                        
+  0012                31     DIFICULDADE2 EQU 18                                                                        
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  000F                34     DIFICULDADE3 EQU 15                                                                        
+  000F                32     DIFICULDADE3 EQU 15                                                                        
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  000A                35     DIFICULDADE4 EQU 10                                                                        
+  000A                33     DIFICULDADE4 EQU 10                                                                        
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  0007                36     DIFICULDADE5 EQU 7                                                                         
+  0007                34     DIFICULDADE5 EQU 7                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  0001                37     LIMITE_X_DIREITA EQU 1                                                                     
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     2
-
+  0001                35     LIMITE_X_DIREITA EQU 1                                                                     
                                           ;  Limite direito do display em relação ao X
 
-  0010                38     LIMITE_X_ESQUERDA EQU 16                                                                ; L
+  0010                36     LIMITE_X_ESQUERDA EQU 16                                                                ; L
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     2
+
                              imite esquerdo do display em relação ao X
 
-  0000                39     LINHA_VAZIA EQU 0                                                                          
+  0000                37     LINHA_VAZIA EQU 0                                                                          
                                                           ; Representa uma linha vazia (imagem com os LEDs todos desligados)
 
-                      40     ;*******************************************************************************
+                      38     ;*******************************************************************************
 
-                      41     ;       Variáveis do jogo
+                      39     ;       Variáveis do jogo
 
-  0028                42     LinhaAtual EQU 40                                                                          
+  0028                40     LinhaAtual EQU 40                                                                          
                                                                   ; Variável para guardar o número de linha
 
-  0029                43     VidasRestantes EQU 41                                                                      
+  0029                41     VidasRestantes EQU 41                                                                      
                                           ; Vidas restantes do jogador
 
-  002A                44     TempoObstaculos EQU 42                                                                     
+  002A                42     TempoObstaculos EQU 42                                                                     
                                   ; Tempo (restante) antes de descerem (novamente) os obstáculos
 
-  002B                45     DificuldadeAtual EQU 43                                                                    
+  002B                43     DificuldadeAtual EQU 43                                                                    
                                           ; Dificuldade atual do jogo (tempo estipulado para a frequência com que os obstáculos vão descendo)
 
-  002C                46     ObstaculosInicio EQU 44                                                                    
+  002C                44     ObstaculosInicio EQU 44                                                                    
                                           ; Limite superior dos obstáculos
 
-  002D                47     NivelAtual EQU 45                                                                          
+  002D                45     NivelAtual EQU 45                                                                          
                                                                   ; Nível atual do jogo (que representa a imagem do vetor a ser desenhada)
 
-  002E                48     ImagemAtual EQU 46                                                                         
+  002E                46     ImagemAtual EQU 46                                                                         
                                                           ;                       
 
-  002F                49     LinhaAtiva EQU 47                                                                          
+  002F                47     LinhaAtiva EQU 47                                                                          
                                                                   ;
 
-  0032                50     NovaImagem EQU 50                                                                          
+  0032                48     NovaImagem EQU 50                                                                          
                                                   ; 
 
-  0046                51     ImagemDisplay EQU 70                                                                       
+  0046                49     ImagemDisplay EQU 70                                                                       
                                           ; Display com 7 valores
 
-                      52     ;*******************************************************************************
+                      50     ;*******************************************************************************
 
-                      53     ; Primeira instrução, após o reset do microcontrolador (rotina principal)
+                      51     ; Primeira instrução, após o reset do microcontrolador (rotina principal)
 
-----                  54     CSEG AT 0000h
+----                  52     CSEG AT 0000h
 
-0000 804E             55     JMP Principal
+0000 804E             53     JMP Principal
 
-                      56     ;*******************************************************************************
+                      54     ;*******************************************************************************
 
-                      57     ;*******************************************************************************
+                      55     ;*******************************************************************************
 
-                      58     ; Rotina de tratamento da interrupção externa 0 (mover jogador para a esquerda)
+                      56     ; Rotina de tratamento da interrupção externa 0 (mover jogador para a esquerda)
 
-----                  59     CSEG AT 0003h
+----                  57     CSEG AT 0003h
 
-0003 01C7             60     JMP MoverJogadorEsquerda
+0003 01C6             58     JMP MoverJogadorEsquerda
 
-                      61     ;*******************************************************************************
+                      59     ;*******************************************************************************
 
-                      62     ;*******************************************************************************
+                      60     ;*******************************************************************************
 
-                      63     ; Rotina de tratamento da interrupção externa 1 (mover jogador para a direita)
+                      61     ; Rotina de tratamento da interrupção externa 1 (mover jogador para a direita)
 
-----                  64     CSEG AT 0013h
+----                  62     CSEG AT 0013h
 
-0013 01E4             65     JMP MoverJogadorDireita
+0013 01E3             63     JMP MoverJogadorDireita
 
-                      66     ;*******************************************************************************
+                      64     ;*******************************************************************************
 
-                      67     ; Rotina de tratamento da interrupção do temporizador 0
+                      65     ; Rotina de tratamento da interrupção do temporizador 0
 
-----                  68     CSEG AT 000bh
+----                  66     CSEG AT 000bh
 
-000B 2101             69     JMP VerificarObstaculos
+000B 2100             67     JMP VerificarObstaculos
 
-                      70     ;*******************************************************************************
+                      68     ;*******************************************************************************
 
-                      71     ;*******************************************************************************
+                      69     ;*******************************************************************************
 
-                      72     ; Rotina de tratamento da interrupção do temporizado 1 (varrimento do display)
+                      70     ; Rotina de tratamento da interrupção do temporizador 1 (varrimento do display)
 
-----                  73     CSEG AT 001bh
+----                  71     CSEG AT 001bh
 
-001B 2132             74     JMP VarrerDisplay
+001B 216C             72     JMP VarrerDisplay
 
-                      75     ;***************************************************************************
+                      73     ;***************************************************************************
 
-                      76     ;***************************************************************************
+                      74     ;***************************************************************************
 
-                      77     
+                      75     
 
-                      78     ;*******************************************************************************
+                      76     ;*******************************************************************************        
 
-                      79     ; Instruções do programa principal
+                      77     ;*******************************************************************************
+
+                      78     ; Rotinas principais
+
+                      79     ;*******************************************************************************
 
 ----                  80     CSEG AT 050h
 
@@ -220,7 +220,7 @@ LOC  OBJ            LINE     SOURCE
 
                       87             
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     3
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     3
 
                       88                     ; Timer 1 no modo 2 (contador de 8 bits com auto-reload)
 
@@ -237,715 +237,1029 @@ LOC  OBJ            LINE     SOURCE
 005F 758AAF           93             MOV TL0, #TEMPO_T0_LOW                                                          ; (
                              este timer vai ser usado para puxar os obstáculos para baixo)
 
-                      94                     ; (sendo este ajustado de nível para nível)
+                      94                     
 
-                      95                     
-
-0062 758D70           96             MOV TH1, #TEMPO_T1                                                                 
+0062 758D70           95             MOV TH1, #TEMPO_T1                                                                 
                                                   ; Timer 1 = 1 segundo
 
-0065 758B70           97             MOV TL1, #TEMPO_T1                                                                 
+0065 758B70           96             MOV TL1, #TEMPO_T1                                                                 
                                                   ; (este timer vai ser usado para o varrimento do display)
 
-                      98             
+                      97             
 
-0068 75B800           99                     MOV IP, #0                                                                 
+0068 75B800           98                     MOV IP, #0                                                                 
                                                                                           ; Não altera as prioridades das interrupções
 
-006B 75A88F          100             MOV IE, #INTERRUPCOES_SETUP                                     ; Activa as interru
+006B 75A88F           99             MOV IE, #INTERRUPCOES_SETUP                                     ; Activa as interru
                              pções
 
-006E D288            101             SETB IT0                                                                           
+006E D288            100             SETB IT0                                                                           
                                                                                           ; Ext0 detectada na transição descendente
 
-0070 D28A            102             SETB IT1                                                                           
+0070 D28A            101             SETB IT1                                                                           
                                                                                           ; Ext1 detectada na transição descendente
 
-0072 D28C            103             SETB TR0                                                                           
+0072 D28C            102             SETB TR0                                                                           
                                                                                           ; Inicia timer 0
 
-0074 D28E            104             SETB TR1                                                                           
+0074 D28E            103             SETB TR1                                                                           
                                                                                           ; Inicia timer 1
 
-0076 75B0FF          105             MOV INPUT, #VAZIO                                                                  
+0076 75B0FF          104             MOV INPUT, #VAZIO                                                                  
                                                           ; Limpeza da porta de entrada (P3)
 
-                     106     
+                     105     
 
-0079                 107         Principal_Jogo:
+0079                 106         Principal_Jogo:
 
-0079 752904          108                     MOV VidasRestantes, #VIDAS_INICIAL              ; As vidas do jogador são i
+0079 752904          107                     MOV VidasRestantes, #VIDAS_INICIAL              ; As vidas do jogador são i
                              nicializadas
 
-007C 752D01          109                     MOV NivelAtual, #NIVEL_INICIAL                                   ; Iniciali
+007C 752D01          108                     MOV NivelAtual, #NIVEL_INICIAL                                   ; Iniciali
                              zação do nível               
 
-                     110             
+                     109             
 
-007F 752B14          111             MOV DificuldadeAtual, #DIFICULDADE1                     ; Muda para a dificuldade d
+007F 752B14          110             MOV DificuldadeAtual, #DIFICULDADE1                     ; Muda para a dificuldade d
                              o nível 1
 
-0082 3170            112             CALL Jogar                                                                         
+0082 31AA            111             CALL Jogar                                                                         
                                                                                   ; Entra no nível 1
 
-                     113             
+                     112             
 
-0084 752B12          114             MOV DificuldadeAtual, #DIFICULDADE2                     ; Muda para a dificuldade d
+0084 752B12          113             MOV DificuldadeAtual, #DIFICULDADE2                     ; Muda para a dificuldade d
                              o nível 2
 
-0087 3170            115             CALL Jogar                                                                         
+0087 31AA            114             CALL Jogar                                                                         
                                                                                   ; Entra no nível 2
 
-                     116             
+                     115             
 
-0089 752B0F          117             MOV DificuldadeAtual, #DIFICULDADE3                     ; Muda para a dificuldade d
+0089 752B0F          116             MOV DificuldadeAtual, #DIFICULDADE3                     ; Muda para a dificuldade d
                              o nível 3
 
-008C 3170            118             CALL Jogar                                                                         
+008C 31AA            117             CALL Jogar                                                                         
                                                                                   ; Entra no nível 3
 
-                     119             
+                     118             
 
-008E 752B0A          120             MOV DificuldadeAtual, #DIFICULDADE4                     ; Muda para a dificuldade d
+008E 752B0A          119             MOV DificuldadeAtual, #DIFICULDADE4                     ; Muda para a dificuldade d
                              o nível 4
 
-0091 3170            121             CALL Jogar                                                                         
+0091 31AA            120             CALL Jogar                                                                         
                                                                                   ; Entra no nível 4
 
-                     122                     
+                     121                     
 
-0093 752B07          123             MOV DificuldadeAtual, #DIFICULDADE5                     ; Muda para a dificuldade d
+0093 752B07          122             MOV DificuldadeAtual, #DIFICULDADE5                     ; Muda para a dificuldade d
                              o nível 5
 
-0096 3170            124             CALL Jogar                                                                         
+0096 31AA            123             CALL Jogar                                                                         
                                                                                   ; Entra no nível 5
 
-                     125                     
+                     124                     
 
-                     126                     ; Caso tenha passado pelos níveis todos
+                     125                     ; Caso tenha passado pelos níveis todos
 
-                     127                     ; Passa para o modo vitória
+                     126                     ; Passa para o modo vitória
 
-0098 2165            128             JMP Victory
+0098 219F            127             JMP Victory
+
+                     128     ;*******************************************************************************
 
                      129     ;*******************************************************************************
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     4
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     4
 
                      130     
 
-                     131     
+                     131     ;*******************************************************************************        
 
-009A                 132     DesenharNovaImagem:
+                     132     ;*******************************************************************************
 
-009A C0E0            133         PUSH ACC                                                                               
-                                                                                  ; Guarda o conteúddo do registo ACC
+                     133     ; Rotina para desenhar uma imagem no display (obstáculos ou imagem de gameover ou vitória)
 
-009C C0F0            134         PUSH B                                                                                 
+                     134     ;*******************************************************************************
+
+009A                 135     DesenharNovaImagem:
+
+009A C0E0            136         PUSH ACC                                                                               
+                                                                                  ; Guarda o conteúdo do registo ACC
+
+009C C0F0            137         PUSH B                                                                                 
                                                                                                   ; Guarda o conteúdo do registo B
 
-009E C000            135         PUSH 0                                                                                 
+009E C000            138         PUSH 0                                                                                 
                                                                                                   ; Guarda o conteúdo do registo R0
 
-00A0 C001            136         PUSH 1                                                                                 
+00A0 C001            139         PUSH 1                                                                                 
                                                                                                   ; Guarda o conteúdo do registo R1
 
-00A2 C002            137         PUSH 2                                                                                 
+00A2 C002            140         PUSH 2                                                                                 
                                                                                                   ; Guarda o conteúdo do registo R2
 
-                     138     
+                     141     
 
-00A4 E532            139         MOV A, NovaImagem                                                                      
+00A4 E532            142         MOV A, NovaImagem                                                                      
                                                           ; Busca o ID da imagem a ser desenhada (NovaImagem)
 
-00A6 75F007          140         MOV B, #NR_LINHAS                                                                      
+00A6 75F007          143         MOV B, #NR_LINHAS                                                                      
                                                   ; Busca o número de linhas
 
-00A9 15F0            141         DEC B                                                                                  
+00A9 15F0            144         DEC B                                                                                  
                                                                                                   ; Decrementa o último 
                              valor (visto que não queremos que faça o display na última linha - linha do jogador)
 
-00AB A4              142         MUL AB                                                                                 
+00AB A4              145         MUL AB                                                                                 
                                                                                                   ; Multiplica o ID da i
                              magem pelo tamanho da linha (de forma a obtermos a imagem pretendida)
 
-                     143             
+                     146             
 
-00AC 7846            144         MOV R0, #ImagemDisplay                                                                 
-                                          ; R0 aponta para o display
+00AC 7846            147         MOV R0, #ImagemDisplay                                                                 
+                                          ; Aponta para a imagem apresentada no display
 
-00AE F9              145         MOV R1, A                                                                              
+00AE F9              148         MOV R1, A                                                                              
                                                                                   ; Guarda o deslocamento
 
-00AF 7A07            146         MOV R2, #NR_LINHAS                                                                     
-                                                  ; Número de linhas do display
+00AF 7A06            149         MOV R2, #POS_JOGADOR                                                                   
+                                          ; Número de linhas do display
 
-00B1 1A              147         DEC R2                                                                                 
-                                                                                                  ; Decrementa o número 
-                             de linhas (visto que não queremos que seja feito o desenho na última linha - linha do jogador)
-
-00B2 90019B          148         MOV DPTR, #Imagens                                                                     
+00B1 9001D5          150         MOV DPTR, #Imagens                                                                     
                                                   ; Endereço base das imagens
 
-                     149         
+                     151         
 
-                     150             ; Ciclo para desenhar no display
+                     152             ; Ciclo para desenhar no display
 
-00B5                 151         CicloDesenhar:                                                                         
+00B4                 153         CicloDesenhar:                                                                         
                                                                           
 
-00B5 93              152             MOVC A, @A+DPTR                                                                    
+00B4 93              154             MOVC A, @A+DPTR                                                                    
                                                   ; Busca uma linha da imagem
 
-00B6 F6              153             MOV @R0, A                                                                         
+00B5 F6              155             MOV @R0, A                                                                         
                                                                           ; Desenha essa linha no display
 
-00B7 08              154             INC R0                                                                             
+00B6 08              156             INC R0                                                                             
                                                                                           ; Passa para a próxima linha no display
 
-00B8 09              155             INC R1                                                                             
+00B7 09              157             INC R1                                                                             
                                                                                           ; Passa para o próxima linha na tabela
 
-00B9 E9              156             MOV A, R1                       
+00B8 E9              158             MOV A, R1                       
 
-00BA DAF9            157             DJNZ R2, CicloDesenhar                                                             
+00B9 DAF9            159             DJNZ R2, CicloDesenhar                                                             
                                           ; Verifica se já desenhou em todas as linhas (exceto na linha do jogador)
 
-                     158     
+                     160     
 
-00BC D002            159         POP 2                                                                                  
+00BB D002            161         POP 2                                                                                  
                                                                                                   ; Repõe o conteúdo do registo R2
 
-00BE D001            160         POP 1                                                                                  
+00BD D001            162         POP 1                                                                                  
                                                                                                   ; Repõe o conteúdo do registo R1
 
-00C0 D000            161         POP 0                                                                                  
+00BF D000            163         POP 0                                                                                  
                                                                                                   ; Repõe o conteúdo do registo R0
 
-00C2 D0F0            162         POP B                                                                                  
+00C1 D0F0            164         POP B                                                                                  
                                                                                                   ; Repõe o conteúdo do registo B
 
-00C4 D0E0            163         POP ACC                                                                                
+00C3 D0E0            165         POP ACC                                                                                
                                                                                           ; Repõe o conteúddo do registo ACC
 
-00C6 22              164         RET
-
-                     165     
-
-                     166     ;*******************************************************************************        
+00C5 22              166         RET
 
                      167     ;*******************************************************************************
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     5
+                     168     ;*******************************************************************************
 
-                     168     ; Rotinas de interrupção (EXT0 e EXT1) que controlam o movimento do jogador
+                     169             
 
-                     169     ;*******************************************************************************
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     5
 
-00C7                 170     MoverJogadorEsquerda:
+                     170     ;*******************************************************************************        
 
-00C7 C0E0            171             PUSH ACC                                                                           
-                                                                                                          ; Guarda o conteúddo do registo ACC
+                     171     ;*******************************************************************************
 
-00C9 C0F0            172             PUSH B                                                                             
-                                                                                                                  ; Guarda o conteúddo do registo B
+                     172     ; Rotinas de interrupção (EXT0 e EXT1) que controlam o movimento do jogador
 
-00CB C000            173             PUSH 0                                                                             
-                                                                                                                  ; Guarda o conteúddo do registo R0
+                     173     ;*******************************************************************************
 
-                     174                             
+00C6                 174     MoverJogadorEsquerda:
 
-00CD 7406            175             MOV A,#POS_JOGADOR                                                                 
+00C6 C0E0            175             PUSH ACC                                                                           
+                                                                                                          ; Guarda o conteúdo do registo ACC
+
+00C8 C0F0            176             PUSH B                                                                             
+                                                                                                                  ; Guarda o conteúdo do registo B
+
+00CA C000            177             PUSH 0                                                                             
+                                                                                                                  ; Guarda o conteúdo do registo R0
+
+                     178                             
+
+00CC 7406            179             MOV A,#POS_JOGADOR                                                                 
                                                                   ; Aponta para a posição do jogador
 
-00CF 75F046          176             MOV B,#ImagemDisplay                                                               
+00CE 75F046          180             MOV B,#ImagemDisplay                                                               
                                                                   ; Aponta para a imagem apresentada no display
 
-00D2 25F0            177             ADD A,B                                                                            
+00D1 25F0            181             ADD A,B                                                                            
                                                                                                                   ; Aponta a linha do jogador
 
-00D4 F8              178             MOV R0,A                                                                           
+00D3 F8              182             MOV R0,A                                                                           
                                                                                                           
 
-00D5 E6              179             MOV A,@R0                                                                          
+00D4 E6              183             MOV A,@R0                                                                          
                                                                                                           ; Guarda a posição do jogador no registo A
-
-                     180             
-
-                     181             ; Caso o jogador não esteja no limite esquerdo do display,
-
-                     182             ; Move para a esquerda
-
-00D6 B41002          183             CJNE A, #LIMITE_X_ESQUERDA, MoverEsquerda       
 
                      184             
 
-                     185             ; Caso contrário,
+                     185             ; Caso o jogador não esteja no limite esquerdo do display,
 
-                     186             ; Não faz mais nada nesta rotina
+                     186             ; Move para a esquerda
 
-00D9 8002            187         JMP FimMoverJogadorEsquerda
+00D5 B41002          187             CJNE A, #LIMITE_X_ESQUERDA, MoverEsquerda       
 
-                     188         
+                     188             
 
-00DB                 189         MoverEsquerda:
+                     189             ; Caso contrário,
 
-00DB 23              190             RL A
+                     190             ; Não faz mais nada nesta rotina
 
-00DC F6              191             MOV @R0,A
+00D8 8002            191         JMP FimMoverJogadorEsquerda
 
-                     192                     
+                     192         
 
-00DD                 193         FimMoverJogadorEsquerda:
+00DA                 193         MoverEsquerda:
 
-00DD D000            194             POP 0
+00DA 23              194             RL A                                                                               
+                                                                                                                  ; Roda para a esquerda o jogador
 
-00DF D0F0            195             POP B
+00DB F6              195             MOV @R0,A                                                                          
+                                                                                                  ; Atualiza a posição do jogador
 
-00E1 D0E0            196             POP ACC
+00DC                 196         FimMoverJogadorEsquerda:
 
-00E3 32              197             RETI
+00DC D000            197             POP 0                                                                              
+                                                                                                          ; Repõe o conteúdo do registo R0
 
-                     198                     
+00DE D0F0            198             POP B                                                                              
+                                                                                                          ; Repõe o conteúdo do registo B
 
-00E4                 199     MoverJogadorDireita:
+00E0 D0E0            199             POP ACC                                                                            
+                                                                                                  ; Repõe o conteúdo do registo ACC
 
-00E4 C0E0            200             PUSH ACC
+00E2 32              200             RETI                                                                               
+                                                                                                                  ; Sai da rotina de interrupção
 
-00E6 C0F0            201             PUSH B
+                     201     ;*******************************************************************************
 
-00E8 C000            202             PUSH 0
+00E3                 202     MoverJogadorDireita:
 
-                     203     
+00E3 C0E0            203             PUSH ACC                                                                           
+                                                                                                          ; Guarda o conteúddo do registo ACC
 
-00EA 7406            204             MOV A,#POS_JOGADOR
+00E5 C0F0            204             PUSH B                                                                             
+                                                                                                                  ; Guarda o conteúddo do registo B
 
-00EC 75F046          205             MOV B,#ImagemDisplay
+00E7 C000            205             PUSH 0                                                                             
+                                                                                                                  ; Guarda o conteúddo do registo R0
 
-00EF 25F0            206             ADD A,B
+                     206                             
 
-00F1 F8              207             MOV R0,A 
+00E9 7406            207             MOV A,#POS_JOGADOR                                                                 
+                                                                  ; Aponta para a posição do jogador
 
-00F2 E6              208             MOV A,@R0                                       ;Posição do joagador 
+00EB 75F046          208             MOV B,#ImagemDisplay                                                               
+                                                                  ; Aponta para a imagem apresentada no display
 
-00F3 B40102          209             CJNE A, #LIMITE_X_DIREITA, MoverDireita
+00EE 25F0            209             ADD A,B                                                                            
+                                                                                                                  ; Aponta a linha do jogador
 
-00F6 8002            210             JMP FimMoverJogadorDireita
+00F0 F8              210             MOV R0,A                                                                           
+                                                                                                          
 
-                     211         
+00F1 E6              211             MOV A,@R0                                                                          
+                                                                                                          ; Guarda a posição do jogador no registo A
 
-00F8                 212             MoverDireita:
+                     212             
 
-00F8 03              213             RR A
+                     213             ; Caso o jogador não esteja no limite direito do display,
 
-00F9 F6              214             MOV @R0,A
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     6
 
-                     215                     
+                     214             ; Move para a esquerda
 
-00FA                 216         FimMoverJogadorDireita:
+00F2 B40102          215             CJNE A, #LIMITE_X_DIREITA, MoverDireita
 
-00FA D000            217             POP 0
+                     216             
 
-00FC D0F0            218             POP B
+                     217             ; Caso contrário,
 
-00FE D0E0            219             POP ACC
+                     218             ; Não faz mais nada nesta rotina
 
-0100 32              220             RETI
+00F5 8002            219         JMP FimMoverJogadorDireita
 
-                     221     ;*******************************************************************************
+                     220         
 
-                     222     ;*******************************************************************************
+00F7                 221         MoverDireita:
 
-                     223      
+00F7 03              222             RR A                                                                               
+                                                                                                                  ; Roda para a direita o jogador
 
-                     224     ;*******************************************************************************
+00F8 F6              223             MOV @R0,A                                                                          
+                                                                                                  ; Atualiza a posição do jogador
 
-0101                 225     VerificarObstaculos:
+                     224                     
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     6
+00F9                 225         FimMoverJogadorDireita:
 
-0101 C0E0            226         PUSH ACC                    ; Guarda o conteúddo do registo ACC
+00F9 D000            226             POP 0                                                                              
+                                                                                                          ; Repõe o conteúdo do registo R0
 
-0103 C000            227             PUSH 0
+00FB D0F0            227             POP B                                                                              
+                                                                                                          ; Repõe o conteúdo do registo B
 
-0105 C001            228             PUSH 1
+00FD D0E0            228             POP ACC                                                                            
+                                                                                                  ; Repõe o conteúdo do registo ACC
 
-0107 C0F0            229         PUSH B
+00FF 32              229             RETI                                                                               
+                                                                                                                  ; Sai da rotina de interrupção
 
-                     230         
+                     230     ;*******************************************************************************
 
-0109 758C3C          231         MOV TH0, #TEMPO_T0_HIGH;            ; Timer 0 = 50 ms
+                     231     ;*******************************************************************************
 
-010C 758AAF          232         MOV TL0, #TEMPO_T0_LOW;             ; Verifica se já passou 1 segundo
+                     232      
 
-010F D52A17          233         DJNZ TempoObstaculos, fimVerificarObstaculos
+                     233     ;*******************************************************************************        
 
-                     234         
+                     234     ;*******************************************************************************
 
-0112                 235         ReinicializarDificuldade:
+                     235     ; Rotina de interrupção (TIMER 0) para puxar os obstáculos
 
-0112 852B2A          236             MOV TempoObstaculos, DificuldadeAtual
+                     236     ;*******************************************************************************
 
-                     237             
+0100                 237     VerificarObstaculos:
 
-0115                 238         VerificarColisoes:
+0100 C0E0            238         PUSH ACC                                                                               
+                                                                                          ; Guarda o conteúdo do registo ACC
 
-0115 7446            239                     MOV A, #ImagemDisplay
+0102 C000            239             PUSH 0                                                                             
+                                                                                                          ; Guarda o conteúdo do registo R0
 
-0117 2406            240                     ADD A, #POS_JOGADOR
+0104 C001            240             PUSH 1                                                                             
+                                                                                                          ; Guarda o conteúdo do registo R1
 
-0119 F5F0            241             MOV B, A
+0106 C002            241             PUSH 2
 
-011B 15F0            242             DEC B
+0108 C0F0            242         PUSH B                                                                                 
+                                                                                                          ; Guarda o conteúdo do registo B
 
-                     243             
+                     243         
 
-011D F8              244             MOV R0, A
+010A 758C3C          244         MOV TH0, #TEMPO_T0_HIGH                                                                
+                                          ; Reinicializa o timer 0
 
-011E E6              245             MOV A, @R0
+010D 758AAF          245         MOV TL0, #TEMPO_T0_LOW                                              
 
-011F A8F0            246             MOV R0, B
+                     246     
 
-0121 86F0            247             MOV B, @R0
+                     247             ; Decrementa o tempo restante para o movimento dos obstáculos
 
-                     248                     
+                     248             ; Verifica se este já acabou (se os obstáculos já se podem mover)
 
-0123 55F0            249                     ANL A, B
+0110 D52A4E          249         DJNZ TempoObstaculos, fimVerificarObstaculos
 
-0125 6002            250                     JZ MoverObstaculos
+                     250         
 
-                     251             
+                     251             ; Caso tenha acabado o tempo, reinicializa o tempo de contagem até que sejam movido
+                              outra vez
 
-0127                 252             DecrementarVidas:
+0113                 252         ReinicializarDificuldade:
 
-0127 1529            253             DEC VidasRestantes
+0113 852B2A          253             MOV TempoObstaculos, DificuldadeAtual
 
-                     254     
+                     254             
 
-0129                 255             MoverObstaculos:
+                     255             ; Verifica se houve colisão entre o jogador e um obstáculo
 
-                     256     ;;;;;;;;;;;;;;;;
+0116                 256         VerificarColisoes:
 
-                     257     ;;;;;;;;;;;;;;;
+0116 7446            257                     MOV A, #ImagemDisplay                                                      
+                                                          ; Aponta para a imagem presente no display
 
-                     258     ;;;;;;;;;;;;;;
+0118 2406            258                     ADD A, #POS_JOGADOR                                                        
+                                                          ; Aponta para a linha do jogador
 
-                     259                     
+011A F5F0            259             MOV B, A
 
-0129                 260     FimVerificarObstaculos:
+011C 15F0            260             DEC B                                                                              
+                                                                                                  ; Aponta para a linha acima do jogador
 
-0129 D0F0            261         POP B
+                     261             
 
-012B D001            262         POP 1
+011E F8              262             MOV R0, A                                                                          
+                                                                                          
 
-012D D000            263         POP 0
+011F E6              263             MOV A, @R0                                                                         
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     7
 
-012F D0E0            264         POP ACC                             ; Repõe o conteúddo do registo ACC
+                                                                                  ; Busca a imagem da linha do jogador
 
-0131 32              265         RETI
+0120 A8F0            264             MOV R0, B
 
-                     266     ;*******************************************************************************
+0122 86F0            265             MOV B, @R0                                                                         
+                                                                                  ; Busca a imagem da linha acima do jogador
 
-                     267     
+                     266                     
 
-                     268     ;*******************************************************************************
+0124 55F0            267                     ANL A, B                                                                   
+                                                                                                          ; Faz a operaç
+                             ão (bitwise) AND de ambas as linhas
 
-                     269     ;*******************************************************************************
+                     268                     
 
-0132                 270     VarrerDisplay:
+                     269                     ; Caso não tenha havido interseção (colisão)
 
-0132 C0E0            271         PUSH ACC                    ; Guarda o conteúdo do registo A
+                     270                     ; Simplesmente move os obstáculos
 
-0134 C000            272         PUSH 0                              ; Guarda o conteúdo do registo R0
+0126 6002            271                     JZ MoverObstaculos
 
-                     273     
+                     272             
 
-0136 7446            274             MOV A, #ImagemDisplay           ; Apontador para a primeira linha
+                     273                     ; Caso contrário,
 
-0138 2528            275             ADD A, LinhaAtual                       ; Apontador para a linha a mostrar no displ
-                             ay
+                     274                     ; Decrementa o nº de vidas
 
-013A F8              276             MOV R0, A                       ; Apontador para a linha do display
+                     275                     ; E move os obstáculos
 
-                     277         
+0128                 276             DecrementarVidas:
 
-013B E52F            278         MOV A, LinhaAtiva
+0128 1529            277                             DEC VidasRestantes
 
-                     279             
+                     278     
 
-013D 7590FF          280             MOV P1, #VAZIO          ; Desliga a selecção de todas as linhas
+012A                 279             MoverObstaculos:
 
-0140 86A0            281             MOV P2, @R0                     ; Actualiza a informação da coluna
+012A 7406            280                     MOV A, #POS_JOGADOR             ;i = POS_JOGADOR -1
 
-0142 F590            282             MOV P1, A                       ; Selecciona a linha
+012C 14              281                     DEC A
 
-                     283     
+                     282                     
 
-0144 0528            284             INC LinhaAtual                  ; Passa para a próxima linha
+012D                 283                     CicloMoverObstaculos:
 
-0146 23              285         RL A
+012D 852CF0          284                             MOV B, ObstaculosInicio
 
-0147 F52F            286         MOV LinhaAtiva, A
+0130 B5F002          285                             CJNE A, B, MoverObstaculosBaixo ; (i != ObstaculosInicio)?
 
-0149 E528            287         MOV A, LinhaAtual
+0133 8015            286                             JMP VerificaObstaculosInicio
 
-014B B40706          288             CJNE A, #NR_LINHAS, FimVarrerDisplay
+                     287                     
 
-014E 752800          289             MOV LinhaAtual, #0                      ; Próxima linha a mostrar
+0135                 288                 MoverObstaculosBaixo:          
 
-0151 752FFE          290         MOV LinhaAtiva, #LINHAATIVA_INICIAL
+0135 F9              289                     MOV R1, A
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     7
+                     290                     
 
-                     291         
+0136 7446            291                     MOV A, #ImagemDisplay
 
-0154                 292         FimVarrerDisplay:
+0138 29              292                     ADD A, R1
 
-0154 D000            293             POP 0                           ; Repõe o conteúdo do registo R0
+                     293                     ;ImagemDisplay[i]
 
-0156 D0E0            294             POP ACC                         ; Repõe o conteúdo do registo A
+                     294                     
 
-0158 32              295             RETI
+0139 F5F0            295                     MOV B, A
 
-                     296     ;*******************************************************************************
+013B 15F0            296                     DEC B
 
-                     297     ;*******************************************************************************
+                     297                     ;ImagemDisplay[i-1]
 
-0159                 298     DesligarInterrupcoes:
+                     298                     
 
-0159 C28C            299         CLR TR0
+013D FA              299                     MOV R2, A
 
-015B 22              300         RET
+013E A8F0            300                     MOV R0, B
 
-                     301     ;*******************************************************************************
+0140 E6              301                     MOV A, @R0
 
-                     302     ;*******************************************************************************
+                     302                     ;Valor de ImagemDisplay[i-1]
 
-015C                 303     GameOver:
+                     303                     
 
-015C 753205          304         MOV NovaImagem, #IMAGEM_GAMEOVER
+0141 8AF0            304                     MOV B, R2
 
-015F 119A            305         CALL DesenharNovaImagem
+0143 A8F0            305                     MOV R0, B
 
-0161 3159            306         CALL DesligarInterrupcoes
+                     306                     ;MOV R0, R2
 
-0163 8009            307         JMP EndLoop
+                     307                     
 
-                     308     
+0145 F6              308                     MOV @R0, A
 
-0165                 309     Victory:
+                     309                 
 
-0165 753206          310         MOV NovaImagem, #IMAGEM_VICTORY
+                     310             
 
-0168 119A            311         CALL DesenharNovaImagem
+0146 E9              311                     MOV A, R1
 
-016A 3159            312         CALL DesligarInterrupcoes
+0147 14              312                     DEC A ;i--
 
-016C 8000            313         JMP EndLoop
+                     313                     
 
-                     314     
+0148 80E3            314                     JMP CicloMoverObstaculos
 
-016E 80FE            315     EndLoop: JMP EndLoop
+                     315     
 
-                     316     ;*******************************************************************************
+014A                 316             VerificaObstaculosInicio:
 
-                     317     ;*******************************************************************************
+014A E52C            317                 MOV A, ObstaculosInicio
 
-0170                 318     Jogar:
+                     318                  
 
-0170 852B2A          319         MOV TempoObstaculos, DificuldadeAtual
+014C 75F007          319                 MOV B, #NR_LINHAS
 
-                     320         
+014F 15F0            320                 DEC B
 
-0173                 321         InicializarJogador:
+                     321                  
 
-0173 7446            322             MOV A, #ImagemDisplay           ; Apontador para a primeira linha
+0151 B5F002          322                 CJNE A, B, IncrementaObstaculosInicio ; (ObstaculosInicio != NR_LINHAS - 1) ?
 
-0175 2406            323             ADD A, #POS_JOGADOR                     ; Apontador para a linha a mostrar no displ
-                             ay
+0154 800B            323                 JMP FimVerificarObstaculos
 
-0177 F8              324             MOV R0, A
+                     324         
 
-0178 7604            325             MOV @R0, #POS_JOGADOR_INICIAL 
+0156                 325                 IncrementaObstaculosInicio:
 
-                     326             
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     8
 
-017A                 327         InicializarObstaculos:
+0156 7446            326                     MOV A, #ImagemDisplay
 
-017A 752C00          328             MOV ObstaculosInicio, #0
+0158 252C            327                     ADD A, ObstaculosInicio
 
-017D A82D            329             MOV R0, NivelAtual
+015A F8              328                     MOV R0, A
 
-017F 18              330             DEC R0
+                     329                      
 
-0180 8832            331             MOV NovaImagem, R0
+015B 7400            330                     MOV A, #LINHA_VAZIA
 
-0182 119A            332             CALL DesenharNovaImagem
+                     331                      
 
-                     333         
+015D F6              332                     MOV @R0, A         ;ImagemDisplay[ObstaculosInicio] = LINHA_VAZIA
 
-0184                 334         CicloJogar:
+015E E6              333                     MOV A, @R0
 
-0184 E529            335             MOV A, VidasRestantes
+                     334                      
 
-0186 600A            336             JZ fimCicloJogar
+015F 052C            335                     INC ObstaculosInicio   ;ObstaculosInicio++
 
-0188 E52C            337             MOV A, ObstaculosInicio
+                     336                     
 
-018A 75F007          338             MOV B, #NR_LINHAS
+0161                 337     FimVerificarObstaculos:
 
-018D 15F0            339             DEC B
+0161 D0F0            338         POP B                                                                                  
+                                                                                                          ; Repõe o conteúdo do registo B
 
-018F B5F0F2          340             CJNE A, B, CicloJogar
+0163 D002            339             POP 2
 
-                     341             
+0165 D001            340         POP 1                                                                                  
+                                                                                                          ; Repõe o conteúdo do registo R1
 
-0192                 342         fimCicloJogar:    
+0167 D000            341         POP 0                                                                                  
+                                                                                                          ; Repõe o conteúdo do registo R0
 
-0192 E529            343             MOV A, VidasRestantes
+0169 D0E0            342         POP ACC                                                                                
+                                                                                                  ; Repõe o conteúdo do registo ACC
 
-0194 7002            344             JNZ ProximoNivel
+016B 32              343         RETI
 
-0196 80C4            345             JMP GameOver
+                     344     ;*******************************************************************************
 
-                     346         
+                     345     ;*******************************************************************************
 
-0198                 347         ProximoNivel:
+                     346     
 
-0198 052D            348             INC NivelAtual
+                     347     ;*******************************************************************************
 
-019A 22              349             RET
+                     348     ;*******************************************************************************
+
+                     349     ; Rotina de interrupção (TIMER 1) para o varrimento do display
 
                      350     ;*******************************************************************************
 
-                     351     ;*******************************************************************************
+016C                 351     VarrerDisplay:
 
-                     352     ; Imagens a mostrar no display
+016C C0E0            352         PUSH ACC                                                                               
+                                                                                          ; Guarda o conteúdo do registo ACC
 
-019B                 353     Imagens:
+016E C000            353         PUSH 0                                                                                 
+                                                                                                          ; Guarda o conteúdo do registo R0
 
-019B 03020401        354     DB 3, 2, 4, 1, 5, 2             ; Nível 1
+                     354     
 
-019F 0502                    
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     8
+0170 7446            355             MOV A, #ImagemDisplay                                                              
+                                                          ; Aponta para a imagem apresentada no display
 
-01A1 04030206        355     DB 4, 3, 2, 6, 0, 0             ; Nível 2
+0172 2528            356             ADD A, LinhaAtual                                                                  
+                                                                                  ; Aponta para a linha a varrer
 
-01A5 0000                    
-01A7 07060206        356     DB 7, 6, 2, 6, 0, 0             ; Nível 3
+0174 F8              357             MOV R0, A                                                                          
+                                                                                                  
 
-01AB 0000                    
-01AD 08020306        357     DB 8, 2, 3, 6, 0, 0             ; Nível 4
+                     358         
 
-01B1 0000                    
-01B3 01040406        358     DB 1, 4, 4, 6, 0, 0             ; Nível 5  
+0175 E52F            359         MOV A, LinhaAtiva                                                                      
+                                                                          ;
 
-01B7 0000                    
-01B9 110A040A        359     DB 17,10,4,10,17,0      ; Game over
+                     360             
 
-01BD 1100                    
-01BF 1F1F1F1F        360     DB 31,31,31,31,31,31    ; Vitória
+0177 7590FF          361             MOV P1, #VAZIO                                                                     
+                                                                                  ; Desliga a selecção de todas as linhas
 
-01C3 1F1F                    
-                     361     ;**************************************************************************
+017A 86A0            362             MOV P2, @R0                                                                        
+                                                                                          ; Actualiza a informação da coluna
 
-                     362     
+017C F590            363             MOV P1, A                                                                          
+                                                                                                  ; Selecciona a linha
 
-                     363     END
+                     364     
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE     9
+017E 0528            365             INC LinhaAtual                                                                     
+                                                                                          ; Passa para a próxima linha
+
+0180 23              366         RL A                                                                                   
+                                                                                                                  ;
+
+0181 F52F            367         MOV LinhaAtiva, A                                                                      
+                                                                          ;
+
+                     368             
+
+0183 E528            369         MOV A, LinhaAtual                                                                      
+                                                                          ;
+
+                     370             
+
+                     371             ; Caso tenha passado por todas as linhas,
+
+                     372             ; Reinicializa os valores de LinhaAtual e LinhaAtiva
+
+0185 B40706          373             CJNE A, #NR_LINHAS, FimVarrerDisplay                                    
+
+0188 752800          374             MOV LinhaAtual, #0                                                                 
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     9
+
+                                                                          
+
+018B 752FFE          375         MOV LinhaAtiva, #LINHAATIVA_INICIAL                                         
+
+                     376         
+
+018E                 377         FimVarrerDisplay:
+
+018E D000            378             POP 0                                                                              
+                                                                                                  ; Repõe o conteúdo do registo R0
+
+0190 D0E0            379             POP ACC                                                                            
+                                                                                          ; Repõe o conteúdo do registo ACC
+
+0192 32              380             RETI
+
+                     381     ;*******************************************************************************
+
+                     382     ;*******************************************************************************        
+
+                     383                     
+
+                     384     ;*******************************************************************************
+
+                     385     ;*******************************************************************************
+
+                     386     ; Rotina que desliga o timer 0 (responsável pelo movimento dos obstáculos)
+
+                     387     ; (usada no fim do jogo, para manter a imagem final intacta)
+
+                     388     ;*******************************************************************************
+
+0193                 389     DesligarInterrupcoes:
+
+0193 C28C            390         CLR TR0                                                                                
+                                                                                                  ; Desliga o timer 0
+
+0195 22              391         RET
+
+                     392     ;*******************************************************************************
+
+                     393     ;*******************************************************************************
+
+                     394     
+
+                     395     ;*******************************************************************************
+
+                     396     ;*******************************************************************************
+
+                     397     ; Rotinas para o final do jogo
+
+                     398     ; (Vitória ou Gameover)
+
+                     399     ;*******************************************************************************
+
+0196                 400     GameOver:
+
+0196 753205          401         MOV NovaImagem, #IMAGEM_GAMEOVER                            ; A próxima imagem a ser de
+                             senhada é a imagem do gameover
+
+0199 119A            402         CALL DesenharNovaImagem                                                                
+                                          ; Desenha essa imagem (gameover)
+
+019B 3193            403         CALL DesligarInterrupcoes                                                              
+                                                  ; Desliga o timer 0
+
+019D 8009            404         JMP EndLoop                                                                            
+                                                                                  ; Entra em loop
+
+                     405     
+
+019F                 406     Victory:
+
+019F 753206          407         MOV NovaImagem, #IMAGEM_VICTORY                                     ; A próxima imagem 
+                             a ser desenhada é a imagem da vitória
+
+01A2 119A            408         CALL DesenharNovaImagem                                                                
+                                          ; Desenha essa imagem (vitória)
+
+01A4 3193            409         CALL DesligarInterrupcoes                                                              
+                                                  ; Desliga o timer 0
+
+01A6 8000            410         JMP EndLoop                                                                            
+                                                                                  ; Entra em loop
+
+                     411     
+
+01A8 80FE            412     EndLoop: JMP EndLoop
+
+                     413     ;*******************************************************************************
+
+                     414     ;*******************************************************************************
+
+                     415     
+
+                     416     ;*******************************************************************************
+
+                     417     ;*******************************************************************************
+
+                     418     ; Rotinas para os níveis do jogo
+
+                     419     ;*******************************************************************************
+
+01AA                 420     Jogar:
+
+01AA 852B2A          421         MOV TempoObstaculos, DificuldadeAtual                               ; Inicializa o temp
+                             o entre cada movimento dos obstáculos
+
+                     422         
+
+01AD                 423         InicializarJogador:
+
+01AD 7446            424             MOV A, #ImagemDisplay                                                              
+                                                  ; Aponta para a imagem apresentada no display
+
+01AF 2406            425             ADD A, #POS_JOGADOR                                                                
+                                                  ; Aponta para a linha do jogador
+
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    10
+
+01B1 F8              426             MOV R0, A
+
+01B2 7604            427             MOV @R0, #POS_JOGADOR_INICIAL                                   ; Põe o jogador na 
+                             sua posição inicial
+
+                     428             
+
+01B4                 429         InicializarObstaculos:
+
+01B4 752C00          430             MOV ObstaculosInicio, #0                                                           
+                                                  ; Limite superior dos obstáculos é inicializado
+
+                     431                     
+
+01B7 A82D            432             MOV R0, NivelAtual                                                                 
+                                                                  ; Busca o ID da imagem do nível (obstáculos)
+
+01B9 18              433             DEC R0
+
+                     434                     
+
+01BA 8832            435             MOV NovaImagem, R0                                                                 
+                                                          ; Passa a ser a imagem a ser desenhada
+
+01BC 119A            436             CALL DesenharNovaImagem                                                            
+                                  ; Desenha os obstáculos
+
+                     437         
+
+01BE                 438         CicloJogar:
+
+01BE E529            439             MOV A, VidasRestantes                                                              
+                                                  ; Busca as vidas do jogador
+
+                     440                     
+
+                     441                     ; Caso o jogador já não tenha vidas,
+
+                     442                     ; Sai do ciclo
+
+01C0 600A            443             JZ fimCicloJogar
+
+                     444                     
+
+01C2 E52C            445             MOV A, ObstaculosInicio                                                            
+                                                  ; Busca o limite superior dos obstáculos
+
+01C4 75F007          446             MOV B, #NR_LINHAS                                                                  
+                                                          ; Busca o número de linhas
+
+01C7 15F0            447             DEC B
+
+                     448                     
+
+                     449                     ; Caso os obstáculos não tenham chegado todos ao fim,
+
+                     450                     ; Continua o ciclo
+
+01C9 B5F0F2          451             CJNE A, B, CicloJogar
+
+                     452             
+
+01CC                 453         fimCicloJogar:    
+
+01CC E529            454             MOV A, VidasRestantes                                                              
+                                                  ; Busca o número de vidas restantes
+
+                     455                     
+
+                     456                     ; Caso o jogador ainda tenha vidas,
+
+                     457                     ; Passa para o próximo nível
+
+01CE 7002            458             JNZ ProximoNivel
+
+                     459                     
+
+                     460                     ; Caso contrário,
+
+                     461                     ; Passa para o Gameover
+
+01D0 80C4            462             JMP GameOver
+
+                     463         
+
+01D2                 464         ProximoNivel:
+
+01D2 052D            465             INC NivelAtual                                                                     
+                                                                                  ; Incrementa o nº do nível
+
+01D4 22              466             RET
+
+                     467     ;*******************************************************************************
+
+                     468     ;*******************************************************************************
+
+                     469     ; Imagens a mostrar no display
+
+01D5                 470     Imagens:
+
+01D5 03020401        471     DB 3, 2, 4, 1, 5, 2             ; Nível 1
+
+01D9 0502                    
+01DB 04030206        472     DB 4, 3, 2, 6, 0, 0             ; Nível 2
+
+01DF 0000                    
+01E1 07060206        473     DB 7, 6, 2, 6, 0, 0             ; Nível 3
+
+01E5 0000                    
+01E7 08020306        474     DB 8, 2, 3, 6, 0, 0             ; Nível 4
+
+01EB 0000                    
+01ED 01040406        475     DB 1, 4, 4, 6, 0, 0             ; Nível 5  
+
+01F1 0000                    
+01F3 110A040A        476     DB 17,10,4,10,17,0      ; Game over
+
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    11
+
+01F7 1100                    
+01F9 1F1F1F1F        477     DB 31,31,31,31,31,31    ; Vitória
+
+01FD 1F1F                    
+                     478     ;**************************************************************************
+
+                     479     
+
+                     480     END
+
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    12
 
 SYMBOL TABLE LISTING
 ------ ----- -------
 
 
-N A M E                   T Y P E  V A L U E   ATTRIBUTES
+N A M E                     T Y P E  V A L U E   ATTRIBUTES
 
-ACC. . . . . . . . . . .  D ADDR   00E0H   A   
-B. . . . . . . . . . . .  D ADDR   00F0H   A   
-CICLODESENHAR. . . . . .  C ADDR   00B5H   A   
-CICLOJOGAR . . . . . . .  C ADDR   0184H   A   
-DECREMENTARVIDAS . . . .  C ADDR   0127H   A   
-DESENHARNOVAIMAGEM . . .  C ADDR   009AH   A   
-DESLIGARINTERRUPCOES . .  C ADDR   0159H   A   
-DIFICULDADE1 . . . . . .  N NUMB   0014H   A   
-DIFICULDADE2 . . . . . .  N NUMB   0012H   A   
-DIFICULDADE3 . . . . . .  N NUMB   000FH   A   
-DIFICULDADE4 . . . . . .  N NUMB   000AH   A   
-DIFICULDADE5 . . . . . .  N NUMB   0007H   A   
-DIFICULDADEATUAL . . . .  N NUMB   002BH   A   
-DISPLAYX . . . . . . . .  D ADDR   00A0H   A   
-DISPLAYY . . . . . . . .  D ADDR   0090H   A   
-ENDLOOP. . . . . . . . .  C ADDR   016EH   A   
-FIMCICLOJOGAR. . . . . .  C ADDR   0192H   A   
-FIMMOVERJOGADORDIREITA .  C ADDR   00FAH   A   
-FIMMOVERJOGADORESQUERDA.  C ADDR   00DDH   A   
-FIMVARRERDISPLAY . . . .  C ADDR   0154H   A   
-FIMVERIFICAROBSTACULOS .  C ADDR   0129H   A   
-GAMEOVER . . . . . . . .  C ADDR   015CH   A   
-IE . . . . . . . . . . .  D ADDR   00A8H   A   
-IMAGEMATUAL. . . . . . .  N NUMB   002EH   A   
-IMAGEMDISPLAY. . . . . .  N NUMB   0046H   A   
-IMAGEM_GAMEOVER. . . . .  N NUMB   0005H   A   
-IMAGEM_VICTORY . . . . .  N NUMB   0006H   A   
-IMAGENS. . . . . . . . .  C ADDR   019BH   A   
-INICIALIZARJOGADOR . . .  C ADDR   0173H   A   
-INICIALIZAROBSTACULOS. .  C ADDR   017AH   A   
-INPUT. . . . . . . . . .  D ADDR   00B0H   A   
-INTERRUPCOES_SETUP . . .  N NUMB   008FH   A   
-IP . . . . . . . . . . .  D ADDR   00B8H   A   
-IT0. . . . . . . . . . .  B ADDR   0088H.0 A   
-IT1. . . . . . . . . . .  B ADDR   0088H.2 A   
-JOGAR. . . . . . . . . .  C ADDR   0170H   A   
-LIGARINTERRUPCOES. . . .  C ADDR   0059H   A   
-LIMITE_X_DIREITA . . . .  N NUMB   0001H   A   
-LIMITE_X_ESQUERDA. . . .  N NUMB   0010H   A   
-LINHAATIVA . . . . . . .  N NUMB   002FH   A   
-LINHAATIVA_INICIAL . . .  N NUMB   00FEH   A   
-LINHAATUAL . . . . . . .  N NUMB   0028H   A   
-LINHA_VAZIA. . . . . . .  N NUMB   0000H   A   
-MOVERDIREITA . . . . . .  C ADDR   00F8H   A   
-MOVERESQUERDA. . . . . .  C ADDR   00DBH   A   
-MOVERJOGADORDIREITA. . .  C ADDR   00E4H   A   
-MOVERJOGADORESQUERDA . .  C ADDR   00C7H   A   
-MOVEROBSTACULOS. . . . .  C ADDR   0129H   A   
-NIVELATUAL . . . . . . .  N NUMB   002DH   A   
-NIVEL_INICIAL. . . . . .  N NUMB   0001H   A   
-NOVAIMAGEM . . . . . . .  N NUMB   0032H   A   
-NR_IMAGENS . . . . . . .  N NUMB   0007H   A   
-NR_LINHAS. . . . . . . .  N NUMB   0007H   A   
-OBSTACULOSINICIO . . . .  N NUMB   002CH   A   
-P1 . . . . . . . . . . .  D ADDR   0090H   A   
-P2 . . . . . . . . . . .  D ADDR   00A0H   A   
-P3 . . . . . . . . . . .  D ADDR   00B0H   A   
-POS_JOGADOR. . . . . . .  N NUMB   0006H   A   
-POS_JOGADOR_INICIAL. . .  N NUMB   0004H   A   
-PRINCIPAL. . . . . . . .  C ADDR   0050H   A   
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 18:25:34 PAGE    10
+ACC. . . . . . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . . . . . .  D ADDR   00F0H   A   
+CICLODESENHAR. . . . . . .  C ADDR   00B4H   A   
+CICLOJOGAR . . . . . . . .  C ADDR   01BEH   A   
+CICLOMOVEROBSTACULOS . . .  C ADDR   012DH   A   
+DECREMENTARVIDAS . . . . .  C ADDR   0128H   A   
+DESENHARNOVAIMAGEM . . . .  C ADDR   009AH   A   
+DESLIGARINTERRUPCOES . . .  C ADDR   0193H   A   
+DIFICULDADE1 . . . . . . .  N NUMB   0014H   A   
+DIFICULDADE2 . . . . . . .  N NUMB   0012H   A   
+DIFICULDADE3 . . . . . . .  N NUMB   000FH   A   
+DIFICULDADE4 . . . . . . .  N NUMB   000AH   A   
+DIFICULDADE5 . . . . . . .  N NUMB   0007H   A   
+DIFICULDADEATUAL . . . . .  N NUMB   002BH   A   
+ENDLOOP. . . . . . . . . .  C ADDR   01A8H   A   
+FIMCICLOJOGAR. . . . . . .  C ADDR   01CCH   A   
+FIMMOVERJOGADORDIREITA . .  C ADDR   00F9H   A   
+FIMMOVERJOGADORESQUERDA. .  C ADDR   00DCH   A   
+FIMVARRERDISPLAY . . . . .  C ADDR   018EH   A   
+FIMVERIFICAROBSTACULOS . .  C ADDR   0161H   A   
+GAMEOVER . . . . . . . . .  C ADDR   0196H   A   
+IE . . . . . . . . . . . .  D ADDR   00A8H   A   
+IMAGEMATUAL. . . . . . . .  N NUMB   002EH   A   
+IMAGEMDISPLAY. . . . . . .  N NUMB   0046H   A   
+IMAGEM_GAMEOVER. . . . . .  N NUMB   0005H   A   
+IMAGEM_VICTORY . . . . . .  N NUMB   0006H   A   
+IMAGENS. . . . . . . . . .  C ADDR   01D5H   A   
+INCREMENTAOBSTACULOSINICIO  C ADDR   0156H   A   
+INICIALIZARJOGADOR . . . .  C ADDR   01ADH   A   
+INICIALIZAROBSTACULOS. . .  C ADDR   01B4H   A   
+INPUT. . . . . . . . . . .  D ADDR   00B0H   A   
+INTERRUPCOES_SETUP . . . .  N NUMB   008FH   A   
+IP . . . . . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . . . . . .  B ADDR   0088H.2 A   
+JOGAR. . . . . . . . . . .  C ADDR   01AAH   A   
+LIGARINTERRUPCOES. . . . .  C ADDR   0059H   A   
+LIMITE_X_DIREITA . . . . .  N NUMB   0001H   A   
+LIMITE_X_ESQUERDA. . . . .  N NUMB   0010H   A   
+LINHAATIVA . . . . . . . .  N NUMB   002FH   A   
+LINHAATIVA_INICIAL . . . .  N NUMB   00FEH   A   
+LINHAATUAL . . . . . . . .  N NUMB   0028H   A   
+LINHA_VAZIA. . . . . . . .  N NUMB   0000H   A   
+MOVERDIREITA . . . . . . .  C ADDR   00F7H   A   
+MOVERESQUERDA. . . . . . .  C ADDR   00DAH   A   
+MOVERJOGADORDIREITA. . . .  C ADDR   00E3H   A   
+MOVERJOGADORESQUERDA . . .  C ADDR   00C6H   A   
+MOVEROBSTACULOS. . . . . .  C ADDR   012AH   A   
+MOVEROBSTACULOSBAIXO . . .  C ADDR   0135H   A   
+NIVELATUAL . . . . . . . .  N NUMB   002DH   A   
+NIVEL_INICIAL. . . . . . .  N NUMB   0001H   A   
+NOVAIMAGEM . . . . . . . .  N NUMB   0032H   A   
+NR_IMAGENS . . . . . . . .  N NUMB   0007H   A   
+NR_LINHAS. . . . . . . . .  N NUMB   0007H   A   
+OBSTACULOSINICIO . . . . .  N NUMB   002CH   A   
+P1 . . . . . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . . . . . .  D ADDR   00B0H   A   
+POS_JOGADOR. . . . . . . .  N NUMB   0006H   A   
+POS_JOGADOR_INICIAL. . . .  N NUMB   0004H   A   
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    13
 
-PRINCIPAL_JOGO . . . . .  C ADDR   0079H   A   
-PROXIMONIVEL . . . . . .  C ADDR   0198H   A   
-REINICIALIZARDIFICULDADE  C ADDR   0112H   A   
-SP . . . . . . . . . . .  D ADDR   0081H   A   
-STACK_POINTER_INICIAL. .  N NUMB   0064H   A   
-TEMPOOBSTACULOS. . . . .  N NUMB   002AH   A   
-TEMPO_T0_HIGH. . . . . .  N NUMB   003CH   A   
-TEMPO_T0_LOW . . . . . .  N NUMB   00AFH   A   
-TEMPO_T1 . . . . . . . .  N NUMB   0070H   A   
-TH0. . . . . . . . . . .  D ADDR   008CH   A   
-TH1. . . . . . . . . . .  D ADDR   008DH   A   
-TL0. . . . . . . . . . .  D ADDR   008AH   A   
-TL1. . . . . . . . . . .  D ADDR   008BH   A   
-TMOD . . . . . . . . . .  D ADDR   0089H   A   
-TR0. . . . . . . . . . .  B ADDR   0088H.4 A   
-TR1. . . . . . . . . . .  B ADDR   0088H.6 A   
-VARRERDISPLAY. . . . . .  C ADDR   0132H   A   
-VAZIO. . . . . . . . . .  N NUMB   00FFH   A   
-VERIFICARCOLISOES. . . .  C ADDR   0115H   A   
-VERIFICAROBSTACULOS. . .  C ADDR   0101H   A   
-VICTORY. . . . . . . . .  C ADDR   0165H   A   
-VIDASRESTANTES . . . . .  N NUMB   0029H   A   
-VIDAS_INICIAL. . . . . .  N NUMB   0004H   A   
+PRINCIPAL. . . . . . . . .  C ADDR   0050H   A   
+PRINCIPAL_JOGO . . . . . .  C ADDR   0079H   A   
+PROXIMONIVEL . . . . . . .  C ADDR   01D2H   A   
+REINICIALIZARDIFICULDADE .  C ADDR   0113H   A   
+SP . . . . . . . . . . . .  D ADDR   0081H   A   
+STACK_POINTER_INICIAL. . .  N NUMB   0064H   A   
+TEMPOOBSTACULOS. . . . . .  N NUMB   002AH   A   
+TEMPO_T0_HIGH. . . . . . .  N NUMB   003CH   A   
+TEMPO_T0_LOW . . . . . . .  N NUMB   00AFH   A   
+TEMPO_T1 . . . . . . . . .  N NUMB   0070H   A   
+TH0. . . . . . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . . . . . .  B ADDR   0088H.6 A   
+VARRERDISPLAY. . . . . . .  C ADDR   016CH   A   
+VAZIO. . . . . . . . . . .  N NUMB   00FFH   A   
+VERIFICAOBSTACULOSINICIO .  C ADDR   014AH   A   
+VERIFICARCOLISOES. . . . .  C ADDR   0116H   A   
+VERIFICAROBSTACULOS. . . .  C ADDR   0100H   A   
+VICTORY. . . . . . . . . .  C ADDR   019FH   A   
+VIDASRESTANTES . . . . . .  N NUMB   0029H   A   
+VIDAS_INICIAL. . . . . . .  N NUMB   0004H   A   
 
 
 REGISTER BANK(S) USED: 0 
