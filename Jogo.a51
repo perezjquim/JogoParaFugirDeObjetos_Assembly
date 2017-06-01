@@ -76,7 +76,7 @@ JMP VarrerDisplay
 ; Instruções do programa principal
 CSEG AT 050h
 Principal:
-    MOV SP, #1000			; Endereço inicial da stack pointer
+    MOV SP, #100			; Endereço inicial da stack pointer
     MOV NivelAtual, #NIVEL_INICIAL			; Imagem inicial
     MOV LinhaAtual, #0			; Mostrar a primeira linha no display
     MOV VidasRestantes, #VIDAS_INICIAL
@@ -217,19 +217,19 @@ VerificarObstaculos:
         MOV TempoObstaculos, R0
         
     VerificarColisoes:
-		;MOV A, #ImagemX
-		;ADD A, #POS_JOGADOR
-        ;MOV B, A
-        ;DEC B
+		MOV A, #ImagemX
+		ADD A, #POS_JOGADOR
+        MOV B, A
+        DEC B
         
-        ;MOV R0, A
-        ;MOV A, @R0
-        ;MOV R0, B
-        ;MOV B, @R0
+        MOV R0, A
+        MOV A, @R0
+        MOV R0, B
+        MOV B, @R0
 		
-		;ANL A, B
-		;JZ MoverObstaculos		
-		;DEC VidasRestantes
+		ANL A, B
+		JZ MoverObstaculos		
+		DEC VidasRestantes
 
 	MoverObstaculos:
 		;;
@@ -330,7 +330,7 @@ Jogar:
 ;*******************************************************************************
 ; Imagens a mostrar no display
 Imagens:
-DB 3, 2, 4, 1, 0, 0		; Nível 1
+DB 3, 2, 4, 1, 5, 2		; Nível 1
 DB 4, 3, 2, 6, 0, 0		; Nível 2
 DB 7, 6, 2, 6, 0, 0		; Nível 3
 DB 8, 2, 3, 6, 0, 0		; Nível 4

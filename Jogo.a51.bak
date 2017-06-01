@@ -5,13 +5,11 @@
 ; Cláudio Ascenso Sardinha, 2030215
 ;*******************************************************************************
 
-
 ;	Portas
 INPUT EQU P3
 DisplayX EQU P2
 DisplayY EQU P1
 ;*******************************************************************************
-
 ; Constantes auxiliares (microcontrolador)
 TEMPO_HIGH EQU 0x3C	 								; Byte mais significativo do timer 0 - 50 ms (12MHz)
 TEMPO_LOW EQU 0xAF	 									; Byte menos significativo do timer 0 - 50 ms (12MHz)
@@ -19,7 +17,6 @@ TEMPO_T1 EQU 0x70	   									; 0x70 Tempo do timer 1 - 112 us (12MHz)
 VAZIO EQU 0xFF												; Porta vazia (tudo desligado)
 INTERRUPCOES_ESTADO_INICIAL EQU 143		; Estado das interrupções ao ser corrido o programa
 ;*******************************************************************************
-
 ;	Constantes auxiliares (jogo)
 IMAGEM_GAMEOVER EQU 5
 IMAGEM_VICTORY EQU 6
@@ -39,7 +36,6 @@ LIMITE_X_DIREITA EQU 1			;  Limite direito do display em relação ao X
 LIMITE_X_ESQUERDA EQU 16	; Limite esquerdo do display em relação ao X
 LINHA_VAZIA EQU 0					; Representa uma linha vazia (imagem com os LEDs todos desligados)
 ;*******************************************************************************
-
 ;	Variáveis do jogo
 LinhaAtual EQU 40						; Variável para guardar o número de linha
 VidasRestantes EQU 41  			; Vidas restantes do jogador
@@ -52,7 +48,6 @@ LinhaAtiva EQU 47
 NovaImagem EQU 50
 ImagemX EQU 70  						; Display com 7 valores
 ;*******************************************************************************
-
 ; Primeira instrução, após o reset do microcontrolador 
 CSEG AT 0000h
 JMP Principal
@@ -77,13 +72,11 @@ JMP MoverJogadorDireita
 CSEG AT 001bh
 JMP VarrerDisplay
 ;***************************************************************************
-
-
 ;*******************************************************************************
 ; Instruções do programa principal
 CSEG AT 050h
 Principal:
-    MOV SP, #1000			; Endereço inicial da stack pointer
+    MOV SP, #100			; Endereço inicial da stack pointer
     MOV NivelAtual, #NIVEL_INICIAL			; Imagem inicial
     MOV LinhaAtual, #0			; Mostrar a primeira linha no display
     MOV VidasRestantes, #VIDAS_INICIAL
@@ -224,19 +217,19 @@ VerificarObstaculos:
         MOV TempoObstaculos, R0
         
     VerificarColisoes:
-		;MOV A, #ImagemX
-		;ADD A, #POS_JOGADOR
-        ;MOV B, A
-        ;DEC B
+		MOV A, #ImagemX
+		ADD A, #POS_JOGADOR
+        MOV B, A
+        DEC B
         
-        ;MOV R0, A
-        ;MOV A, @R0
-        ;MOV R0, B
-        ;MOV B, @R0
+        MOV R0, A
+        MOV A, @R0
+        MOV R0, B
+        MOV B, @R0
 		
-		;ANL A, B
-		;JZ MoverObstaculos		
-		;DEC VidasRestantes
+		ANL A, B
+		JZ MoverObstaculos		
+		DEC VidasRestantes
 
 	MoverObstaculos:
 		;;

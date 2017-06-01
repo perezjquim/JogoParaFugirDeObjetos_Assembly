@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     1
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -107,7 +107,7 @@ LOC  OBJ            LINE     SOURCE
   002A                42     TempoObstaculos EQU 42          ; Tempo (restante) antes de descerem (novamente) os obstácu
                              los
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     2
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     2
 
   002B                43     DificuldadeAtual EQU 43                 ; Dificuldade atual do jogo (tempo estipulado para 
                              a frequência com que os obstáculos vão descendo)
@@ -171,7 +171,7 @@ LOC  OBJ            LINE     SOURCE
 
 ----                  72     CSEG AT 001bh
 
-001B 2128             73     JMP VarrerDisplay
+001B 213C             73     JMP VarrerDisplay
 
                       74     ;***************************************************************************
 
@@ -183,10 +183,8 @@ LOC  OBJ            LINE     SOURCE
 
 0050                  78     Principal:
 
-0050 7581E8           79         MOV SP, #1000                       ; Endereço inicial da stack pointer
+0050 758164           79         MOV SP, #100                        ; Endereço inicial da stack pointer
 
-*** ______________________________________^
-*** WARNING #A52 IN 79 (Jogo.a51, LINE 79): VALUE HAS BEEN TRUNCATED TO 8 BITS
 0053 752D01           80         MOV NivelAtual, #NIVEL_INICIAL                      ; Imagem inicial
 
 0056 752800           81         MOV LinhaAtual, #0                  ; Mostrar a primeira linha no display
@@ -233,37 +231,37 @@ LOC  OBJ            LINE     SOURCE
 
 0082 752B14          102             MOV DificuldadeAtual, #DIFICULDADE1
 
-0085 3166            103             CALL Jogar
+0085 317A            103             CALL Jogar
 
                      104             
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     3
-
 0087 752B12          105             MOV DificuldadeAtual, #DIFICULDADE2
 
-008A 3166            106             CALL Jogar
+008A 317A            106             CALL Jogar
+
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     3
 
                      107             
 
 008C 752B0F          108             MOV DificuldadeAtual, #DIFICULDADE3
 
-008F 3166            109             CALL Jogar
+008F 317A            109             CALL Jogar
 
                      110             
 
 0091 752B0A          111             MOV DificuldadeAtual, #DIFICULDADE4
 
-0094 3166            112             CALL Jogar
+0094 317A            112             CALL Jogar
 
                      113             
 
 0096 752B07          114             MOV DificuldadeAtual, #DIFICULDADE5
 
-0099 3166            115             CALL Jogar
+0099 317A            115             CALL Jogar
 
                      116             
 
-009B 215B            117             JMP Victory
+009B 216F            117             JMP Victory
 
                      118     ;*******************************************************************************
 
@@ -301,7 +299,7 @@ LOC  OBJ            LINE     SOURCE
 
 00B4 1A              135         DEC R2
 
-00B5 900192          136         MOV DPTR, #Imagens          ; Endereço base das imagens
+00B5 9001A6          136         MOV DPTR, #Imagens          ; Endereço base das imagens
 
                      137         
 
@@ -371,11 +369,11 @@ LOC  OBJ            LINE     SOURCE
 
 00E2 F6              170             MOV @R0,A
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     4
-
                      171                     
 
 00E3                 172         FimMoverJogadorEsquerda:
+
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     4
 
 00E3 D000            173             POP 0
 
@@ -457,7 +455,7 @@ LOC  OBJ            LINE     SOURCE
 
 0115 758AAF          212         MOV TL0, #TEMPO_LOW;                ; Verifica se já passou 1 segundo
 
-0118 D52A04          213         DJNZ TempoObstaculos, fimVerificarObstaculos
+0118 D52A18          213         DJNZ TempoObstaculos, fimVerificarObstaculos
 
                      214         
 
@@ -471,55 +469,55 @@ LOC  OBJ            LINE     SOURCE
 
 011F                 219         VerificarColisoes:
 
-                     220                     ;MOV A, #ImagemX
+011F 7446            220                     MOV A, #ImagemX
 
-                     221                     ;ADD A, #POS_JOGADOR
+0121 2406            221                     ADD A, #POS_JOGADOR
 
-                     222             ;MOV B, A
+0123 F5F0            222             MOV B, A
 
-                     223             ;DEC B
+0125 15F0            223             DEC B
 
                      224             
 
-                     225             ;MOV R0, A
+0127 F8              225             MOV R0, A
 
-                     226             ;MOV A, @R0
+0128 E6              226             MOV A, @R0
 
-                     227             ;MOV R0, B
+0129 A8F0            227             MOV R0, B
 
-                     228             ;MOV B, @R0
+012B 86F0            228             MOV B, @R0
 
                      229                     
 
-                     230                     ;ANL A, B
+012D 55F0            230                     ANL A, B
 
-                     231                     ;JZ MoverObstaculos             
+012F 6002            231                     JZ MoverObstaculos              
 
-                     232                     ;DEC VidasRestantes
+0131 1529            232                     DEC VidasRestantes
 
                      233     
 
-011F                 234             MoverObstaculos:
+0133                 234             MoverObstaculos:
 
                      235                     ;;
 
                      236                     ;;
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     5
-
                      237                     
 
-011F                 238     FimVerificarObstaculos:
+0133                 238     FimVerificarObstaculos:
 
-011F D0F0            239         POP B
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     5
 
-0121 D001            240         POP 1
+0133 D0F0            239         POP B
 
-0123 D000            241         POP 0
+0135 D001            240         POP 1
 
-0125 D0E0            242         POP ACC                             ; Repõe o conteúddo do registo ACC
+0137 D000            241         POP 0
 
-0127 32              243         RETI
+0139 D0E0            242         POP ACC                             ; Repõe o conteúddo do registo ACC
+
+013B 32              243         RETI
 
                      244     ;*******************************************************************************
 
@@ -529,169 +527,171 @@ LOC  OBJ            LINE     SOURCE
 
                      247     ;*******************************************************************************
 
-0128                 248     VarrerDisplay:
+013C                 248     VarrerDisplay:
 
-0128 C0E0            249         PUSH ACC                    ; Guarda o conteúdo do registo A
+013C C0E0            249         PUSH ACC                    ; Guarda o conteúdo do registo A
 
-012A C000            250         PUSH 0                              ; Guarda o conteúdo do registo R0
+013E C000            250         PUSH 0                              ; Guarda o conteúdo do registo R0
 
                      251     
 
-012C 7446            252             MOV A, #ImagemX         ; Apontador para a primeira linha
+0140 7446            252             MOV A, #ImagemX         ; Apontador para a primeira linha
 
-012E 2528            253             ADD A, LinhaAtual                       ; Apontador para a linha a mostrar no display
+0142 2528            253             ADD A, LinhaAtual                       ; Apontador para a linha a mostrar no displ
+                             ay
 
-0130 F8              254             MOV R0, A                       ; Apontador para a linha do display
+0144 F8              254             MOV R0, A                       ; Apontador para a linha do display
 
                      255         
 
-0131 E52F            256         MOV A, LinhaAtiva
+0145 E52F            256         MOV A, LinhaAtiva
 
                      257             
 
-0133 7590FF          258             MOV P1, #VAZIO          ; Desliga a selecção de todas as linhas
+0147 7590FF          258             MOV P1, #VAZIO          ; Desliga a selecção de todas as linhas
 
-0136 86A0            259             MOV P2, @R0                     ; Actualiza a informação da coluna
+014A 86A0            259             MOV P2, @R0                     ; Actualiza a informação da coluna
 
-0138 F590            260             MOV P1, A                       ; Selecciona a linha
+014C F590            260             MOV P1, A                       ; Selecciona a linha
 
                      261     
 
-013A 0528            262             INC LinhaAtual                  ; Passa para a próxima linha
+014E 0528            262             INC LinhaAtual                  ; Passa para a próxima linha
 
-013C 23              263         RL A
+0150 23              263         RL A
 
-013D F52F            264         MOV LinhaAtiva, A
+0151 F52F            264         MOV LinhaAtiva, A
 
-013F E528            265         MOV A, LinhaAtual
+0153 E528            265         MOV A, LinhaAtual
 
-0141 B40706          266             CJNE A, #NR_LINHAS, FimVarrerDisplay
+0155 B40706          266             CJNE A, #NR_LINHAS, FimVarrerDisplay
 
-0144 752800          267             MOV LinhaAtual, #0                      ; Próxima linha a mostrar
+0158 752800          267             MOV LinhaAtual, #0                      ; Próxima linha a mostrar
 
-0147 752FFE          268         MOV LinhaAtiva, #LINHAATIVA_INICIAL
+015B 752FFE          268         MOV LinhaAtiva, #LINHAATIVA_INICIAL
 
                      269         
 
-014A                 270         FimVarrerDisplay:
+015E                 270         FimVarrerDisplay:
 
-014A D000            271             POP 0                           ; Repõe o conteúdo do registo R0
+015E D000            271             POP 0                           ; Repõe o conteúdo do registo R0
 
-014C D0E0            272             POP ACC                         ; Repõe o conteúdo do registo A
+0160 D0E0            272             POP ACC                         ; Repõe o conteúdo do registo A
 
-014E 32              273             RETI
+0162 32              273             RETI
 
                      274     ;*******************************************************************************
 
                      275     ;*******************************************************************************
 
-014F                 276     DesligarInterrupcoes:
+0163                 276     DesligarInterrupcoes:
 
-014F C28C            277         CLR TR0
+0163 C28C            277         CLR TR0
 
-0151 22              278         RET
+0165 22              278         RET
 
                      279     ;*******************************************************************************
 
                      280     ;*******************************************************************************
 
-0152                 281     GameOver:
+0166                 281     GameOver:
 
-0152 753205          282         MOV NovaImagem, #IMAGEM_GAMEOVER
+0166 753205          282         MOV NovaImagem, #IMAGEM_GAMEOVER
 
-0155 119D            283         CALL DesenharNovaImagem
+0169 119D            283         CALL DesenharNovaImagem
 
-0157 314F            284         CALL DesligarInterrupcoes
+016B 3163            284         CALL DesligarInterrupcoes
 
-0159 8009            285         JMP EndLoop
+016D 8009            285         JMP EndLoop
 
                      286     
 
-015B                 287     Victory:
+016F                 287     Victory:
 
-015B 753206          288         MOV NovaImagem, #IMAGEM_VICTORY
+016F 753206          288         MOV NovaImagem, #IMAGEM_VICTORY
 
-015E 119D            289         CALL DesenharNovaImagem
+0172 119D            289         CALL DesenharNovaImagem
 
-0160 314F            290         CALL DesligarInterrupcoes
+0174 3163            290         CALL DesligarInterrupcoes
 
-0162 8000            291         JMP EndLoop
+0176 8000            291         JMP EndLoop
 
                      292     
 
-0164 80FE            293     EndLoop: JMP EndLoop
+0178 80FE            293     EndLoop: JMP EndLoop
 
                      294     ;*******************************************************************************
 
                      295     ;*******************************************************************************
 
-0166                 296     Jogar:
+017A                 296     Jogar:
 
-0166 E52B            297         MOV A, DificuldadeAtual
+017A E52B            297         MOV A, DificuldadeAtual
 
-0168 F52A            298         MOV TempoObstaculos, A
+017C F52A            298         MOV TempoObstaculos, A
 
                      299         
 
-016A                 300         InicializarJogador:
+017E                 300         InicializarJogador:
 
-016A 7446            301             MOV A, #ImagemX         ; Apontador para a primeira linha
+017E 7446            301             MOV A, #ImagemX         ; Apontador para a primeira linha
 
-016C 2406            302             ADD A, #POS_JOGADOR                     ; Apontador para a linha a mostrar no display
+0180 2406            302             ADD A, #POS_JOGADOR                     ; Apontador para a linha a mostrar no displ
+                             ay
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     6
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     6
 
-016E F8              303             MOV R0, A
+0182 F8              303             MOV R0, A
 
-016F 7604            304             MOV @R0, #POS_JOGADOR_INICIAL 
+0183 7604            304             MOV @R0, #POS_JOGADOR_INICIAL 
 
                      305             
 
-0171                 306         InicializarObstaculos:
+0185                 306         InicializarObstaculos:
 
-0171 752C00          307             MOV ObstaculosInicio, #0
+0185 752C00          307             MOV ObstaculosInicio, #0
 
-0174 A82D            308             MOV R0, NivelAtual
+0188 A82D            308             MOV R0, NivelAtual
 
-0176 18              309             DEC R0
+018A 18              309             DEC R0
 
-0177 8832            310             MOV NovaImagem, R0
+018B 8832            310             MOV NovaImagem, R0
 
-0179 119D            311             CALL DesenharNovaImagem
+018D 119D            311             CALL DesenharNovaImagem
 
                      312         
 
-017B                 313         CicloJogar:
+018F                 313         CicloJogar:
 
-017B E529            314             MOV A, VidasRestantes
+018F E529            314             MOV A, VidasRestantes
 
-017D 600A            315             JZ fimCicloJogar
+0191 600A            315             JZ fimCicloJogar
 
-017F E52C            316             MOV A, ObstaculosInicio
+0193 E52C            316             MOV A, ObstaculosInicio
 
-0181 75F007          317             MOV B, #NR_LINHAS
+0195 75F007          317             MOV B, #NR_LINHAS
 
-0184 15F0            318             DEC B
+0198 15F0            318             DEC B
 
-0186 B5F0F2          319             CJNE A, B, CicloJogar
+019A B5F0F2          319             CJNE A, B, CicloJogar
 
                      320             
 
-0189                 321         fimCicloJogar:    
+019D                 321         fimCicloJogar:    
 
-0189 E529            322             MOV A, VidasRestantes
+019D E529            322             MOV A, VidasRestantes
 
-018B 7002            323             JNZ FimJogar
+019F 7002            323             JNZ FimJogar
 
-018D 80C3            324             JMP GameOver
+01A1 80C3            324             JMP GameOver
 
                      325         
 
-018F                 326         fimJogar:
+01A3                 326         fimJogar:
 
-018F 052D            327             INC NivelAtual
+01A3 052D            327             INC NivelAtual
 
-0191 22              328             RET
+01A5 22              328             RET
 
                      329     ;*******************************************************************************
 
@@ -699,36 +699,36 @@ LOC  OBJ            LINE     SOURCE
 
                      331     ; Imagens a mostrar no display
 
-0192                 332     Imagens:
+01A6                 332     Imagens:
 
-0192 03020401        333     DB 3, 2, 4, 1, 0, 0             ; Nível 1
+01A6 03020401        333     DB 3, 2, 4, 1, 5, 2             ; Nível 1
 
-0196 0000                    
-0198 04030206        334     DB 4, 3, 2, 6, 0, 0             ; Nível 2
+01AA 0502                    
+01AC 04030206        334     DB 4, 3, 2, 6, 0, 0             ; Nível 2
 
-019C 0000                    
-019E 07060206        335     DB 7, 6, 2, 6, 0, 0             ; Nível 3
+01B0 0000                    
+01B2 07060206        335     DB 7, 6, 2, 6, 0, 0             ; Nível 3
 
-01A2 0000                    
-01A4 08020306        336     DB 8, 2, 3, 6, 0, 0             ; Nível 4
+01B6 0000                    
+01B8 08020306        336     DB 8, 2, 3, 6, 0, 0             ; Nível 4
 
-01A8 0000                    
-01AA 01040406        337     DB 1, 4, 4, 6, 0, 0             ; Nível 5  
+01BC 0000                    
+01BE 01040406        337     DB 1, 4, 4, 6, 0, 0             ; Nível 5  
 
-01AE 0000                    
-01B0 110A040A        338     DB 17,10,4,10,17,0      ; Game over
+01C2 0000                    
+01C4 110A040A        338     DB 17,10,4,10,17,0      ; Game over
 
-01B4 1100                    
-01B6 1F1F1F1F        339     DB 31,31,31,31,31,31    ; Vitória
+01C8 1100                    
+01CA 1F1F1F1F        339     DB 31,31,31,31,31,31    ; Vitória
 
-01BA 1F1F                    
+01CE 1F1F                    
                      340     ;**************************************************************************
 
                      341     
 
                      342     END
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     7
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     7
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -739,9 +739,9 @@ N A M E                      T Y P E  V A L U E   ATTRIBUTES
 ACC . . . . . . . . . . . .  D ADDR   00E0H   A   
 B . . . . . . . . . . . . .  D ADDR   00F0H   A   
 CICLODESENHAR . . . . . . .  C ADDR   00B8H   A   
-CICLOJOGAR. . . . . . . . .  C ADDR   017BH   A   
+CICLOJOGAR. . . . . . . . .  C ADDR   018FH   A   
 DESENHARNOVAIMAGEM. . . . .  C ADDR   009DH   A   
-DESLIGARINTERRUPCOES. . . .  C ADDR   014FH   A   
+DESLIGARINTERRUPCOES. . . .  C ADDR   0163H   A   
 DIFICULDADE1. . . . . . . .  N NUMB   0014H   A   
 DIFICULDADE2. . . . . . . .  N NUMB   0012H   A   
 DIFICULDADE3. . . . . . . .  N NUMB   000FH   A   
@@ -750,28 +750,28 @@ DIFICULDADE5. . . . . . . .  N NUMB   0007H   A
 DIFICULDADEATUAL. . . . . .  N NUMB   002BH   A   
 DISPLAYX. . . . . . . . . .  D ADDR   00A0H   A   
 DISPLAYY. . . . . . . . . .  D ADDR   0090H   A   
-ENDLOOP . . . . . . . . . .  C ADDR   0164H   A   
-FIMCICLOJOGAR . . . . . . .  C ADDR   0189H   A   
-FIMJOGAR. . . . . . . . . .  C ADDR   018FH   A   
+ENDLOOP . . . . . . . . . .  C ADDR   0178H   A   
+FIMCICLOJOGAR . . . . . . .  C ADDR   019DH   A   
+FIMJOGAR. . . . . . . . . .  C ADDR   01A3H   A   
 FIMMOVERJOGADORDIREITA. . .  C ADDR   0103H   A   
 FIMMOVERJOGADORESQUERDA . .  C ADDR   00E3H   A   
-FIMVARRERDISPLAY. . . . . .  C ADDR   014AH   A   
-FIMVERIFICAROBSTACULOS. . .  C ADDR   011FH   A   
-GAMEOVER. . . . . . . . . .  C ADDR   0152H   A   
+FIMVARRERDISPLAY. . . . . .  C ADDR   015EH   A   
+FIMVERIFICAROBSTACULOS. . .  C ADDR   0133H   A   
+GAMEOVER. . . . . . . . . .  C ADDR   0166H   A   
 IE. . . . . . . . . . . . .  D ADDR   00A8H   A   
 IMAGEMATUAL . . . . . . . .  N NUMB   002EH   A   
 IMAGEMX . . . . . . . . . .  N NUMB   0046H   A   
 IMAGEM_GAMEOVER . . . . . .  N NUMB   0005H   A   
 IMAGEM_VICTORY. . . . . . .  N NUMB   0006H   A   
-IMAGENS . . . . . . . . . .  C ADDR   0192H   A   
-INICIALIZARJOGADOR. . . . .  C ADDR   016AH   A   
-INICIALIZAROBSTACULOS . . .  C ADDR   0171H   A   
+IMAGENS . . . . . . . . . .  C ADDR   01A6H   A   
+INICIALIZARJOGADOR. . . . .  C ADDR   017EH   A   
+INICIALIZAROBSTACULOS . . .  C ADDR   0185H   A   
 INPUT . . . . . . . . . . .  D ADDR   00B0H   A   
 INTERRUPCOES_ESTADO_INICIAL  N NUMB   008FH   A   
 IP. . . . . . . . . . . . .  D ADDR   00B8H   A   
 IT0 . . . . . . . . . . . .  B ADDR   0088H.0 A   
 IT1 . . . . . . . . . . . .  B ADDR   0088H.2 A   
-JOGAR . . . . . . . . . . .  C ADDR   0166H   A   
+JOGAR . . . . . . . . . . .  C ADDR   017AH   A   
 LIGARINTERRUPCOES . . . . .  C ADDR   0062H   A   
 LIMITE_X_DIREITA. . . . . .  N NUMB   0001H   A   
 LIMITE_X_ESQUERDA . . . . .  N NUMB   0010H   A   
@@ -783,7 +783,7 @@ MOVERDIREITA. . . . . . . .  C ADDR   00FEH   A
 MOVERESQUERDA . . . . . . .  C ADDR   00DEH   A   
 MOVERJOGADORDIREITA . . . .  C ADDR   00EAH   A   
 MOVERJOGADORESQUERDA. . . .  C ADDR   00CAH   A   
-MOVEROBSTACULOS . . . . . .  C ADDR   011FH   A   
+MOVEROBSTACULOS . . . . . .  C ADDR   0133H   A   
 NIVELATUAL. . . . . . . . .  N NUMB   002DH   A   
 NIVEL_INICIAL . . . . . . .  N NUMB   0001H   A   
 NOVAIMAGEM. . . . . . . . .  N NUMB   0032H   A   
@@ -796,7 +796,7 @@ P3. . . . . . . . . . . . .  D ADDR   00B0H   A
 POS_JOGADOR . . . . . . . .  N NUMB   0006H   A   
 POS_JOGADOR_INICIAL . . . .  N NUMB   0004H   A   
 PRINCIPAL . . . . . . . . .  C ADDR   0050H   A   
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:48:13 PAGE     8
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 16:53:33 PAGE     8
 
 PRINCIPAL_JOGO. . . . . . .  C ADDR   0082H   A   
 REINICIALIZARDIFICULDADE. .  C ADDR   011BH   A   
@@ -812,11 +812,11 @@ TL1 . . . . . . . . . . . .  D ADDR   008BH   A
 TMOD. . . . . . . . . . . .  D ADDR   0089H   A   
 TR0 . . . . . . . . . . . .  B ADDR   0088H.4 A   
 TR1 . . . . . . . . . . . .  B ADDR   0088H.6 A   
-VARRERDISPLAY . . . . . . .  C ADDR   0128H   A   
+VARRERDISPLAY . . . . . . .  C ADDR   013CH   A   
 VAZIO . . . . . . . . . . .  N NUMB   00FFH   A   
 VERIFICARCOLISOES . . . . .  C ADDR   011FH   A   
 VERIFICAROBSTACULOS . . . .  C ADDR   010AH   A   
-VICTORY . . . . . . . . . .  C ADDR   015BH   A   
+VICTORY . . . . . . . . . .  C ADDR   016FH   A   
 VIDASRESTANTES. . . . . . .  N NUMB   0029H   A   
 VIDAS_INICIAL . . . . . . .  N NUMB   0004H   A   
 
@@ -824,4 +824,4 @@ VIDAS_INICIAL . . . . . . .  N NUMB   0004H   A
 REGISTER BANK(S) USED: 0 
 
 
-ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

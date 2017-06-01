@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        06/01/2017  16:48:13  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/01/2017  16:53:56  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -29,7 +29,7 @@ LINK MAP OF MODULE:  .\Objects\Jogo (JOGO)
                     0015H     0006H                  *** GAP ***
             CODE    001BH     0002H     ABSOLUTE     
                     001DH     0033H                  *** GAP ***
-            CODE    0050H     016CH     ABSOLUTE     
+            CODE    0050H     0180H     ABSOLUTE     
 
 
 
@@ -42,9 +42,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
   C:00B8H         SYMBOL        CICLODESENHAR
-  C:017BH         SYMBOL        CICLOJOGAR
+  C:018FH         SYMBOL        CICLOJOGAR
   C:009DH         SYMBOL        DESENHARNOVAIMAGEM
-  C:014FH         SYMBOL        DESLIGARINTERRUPCOES
+  C:0163H         SYMBOL        DESLIGARINTERRUPCOES
   N:0014H         SYMBOL        DIFICULDADE1
   N:0012H         SYMBOL        DIFICULDADE2
   N:000FH         SYMBOL        DIFICULDADE3
@@ -53,31 +53,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   N:002BH         SYMBOL        DIFICULDADEATUAL
   D:00A0H         SYMBOL        DISPLAYX
   D:0090H         SYMBOL        DISPLAYY
-  C:0164H         SYMBOL        ENDLOOP
-  C:0189H         SYMBOL        FIMCICLOJOGAR
-  C:018FH         SYMBOL        FIMJOGAR
+  C:0178H         SYMBOL        ENDLOOP
+  C:019DH         SYMBOL        FIMCICLOJOGAR
+  C:01A3H         SYMBOL        FIMJOGAR
   C:0103H         SYMBOL        FIMMOVERJOGADORDIREITA
   C:00E3H         SYMBOL        FIMMOVERJOGADORESQUERDA
-  C:014AH         SYMBOL        FIMVARRERDISPLAY
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:48:13  PAGE 2
+  C:015EH         SYMBOL        FIMVARRERDISPLAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:53:56  PAGE 2
 
 
-  C:011FH         SYMBOL        FIMVERIFICAROBSTACULOS
-  C:0152H         SYMBOL        GAMEOVER
+  C:0133H         SYMBOL        FIMVERIFICAROBSTACULOS
+  C:0166H         SYMBOL        GAMEOVER
   D:00A8H         SYMBOL        IE
   N:002EH         SYMBOL        IMAGEMATUAL
   N:0046H         SYMBOL        IMAGEMX
   N:0005H         SYMBOL        IMAGEM_GAMEOVER
   N:0006H         SYMBOL        IMAGEM_VICTORY
-  C:0192H         SYMBOL        IMAGENS
-  C:016AH         SYMBOL        INICIALIZARJOGADOR
-  C:0171H         SYMBOL        INICIALIZAROBSTACULOS
+  C:01A6H         SYMBOL        IMAGENS
+  C:017EH         SYMBOL        INICIALIZARJOGADOR
+  C:0185H         SYMBOL        INICIALIZAROBSTACULOS
   D:00B0H         SYMBOL        INPUT
   N:008FH         SYMBOL        INTERRUPCOES_ESTADO_INICIAL
   D:00B8H         SYMBOL        IP
   B:0088H.0       SYMBOL        IT0
   B:0088H.2       SYMBOL        IT1
-  C:0166H         SYMBOL        JOGAR
+  C:017AH         SYMBOL        JOGAR
   C:0062H         SYMBOL        LIGARINTERRUPCOES
   N:0001H         SYMBOL        LIMITE_X_DIREITA
   N:0010H         SYMBOL        LIMITE_X_ESQUERDA
@@ -89,7 +89,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:00DEH         SYMBOL        MOVERESQUERDA
   C:00EAH         SYMBOL        MOVERJOGADORDIREITA
   C:00CAH         SYMBOL        MOVERJOGADORESQUERDA
-  C:011FH         SYMBOL        MOVEROBSTACULOS
+  C:0133H         SYMBOL        MOVEROBSTACULOS
   N:002DH         SYMBOL        NIVELATUAL
   N:0001H         SYMBOL        NIVEL_INICIAL
   N:0032H         SYMBOL        NOVAIMAGEM
@@ -116,14 +116,14 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   D:0089H         SYMBOL        TMOD
   B:0088H.4       SYMBOL        TR0
   B:0088H.6       SYMBOL        TR1
-  C:0128H         SYMBOL        VARRERDISPLAY
+  C:013CH         SYMBOL        VARRERDISPLAY
   N:00FFH         SYMBOL        VAZIO
   C:011FH         SYMBOL        VERIFICARCOLISOES
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:48:13  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:53:56  PAGE 3
 
 
   C:010AH         SYMBOL        VERIFICAROBSTACULOS
-  C:015BH         SYMBOL        VICTORY
+  C:016FH         SYMBOL        VICTORY
   N:0029H         SYMBOL        VIDASRESTANTES
   N:0004H         SYMBOL        VIDAS_INICIAL
   C:0000H         LINE#         53
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:00BAH         LINE#         141
   C:00BBH         LINE#         142
   C:00BCH         LINE#         143
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:48:13  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:53:56  PAGE 4
 
 
   C:00BDH         LINE#         144
@@ -232,74 +232,85 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:0118H         LINE#         213
   C:011BH         LINE#         216
   C:011DH         LINE#         217
-  C:011FH         LINE#         239
-  C:0121H         LINE#         240
-  C:0123H         LINE#         241
-  C:0125H         LINE#         242
-  C:0127H         LINE#         243
-  C:0128H         LINE#         249
-  C:012AH         LINE#         250
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:48:13  PAGE 5
+  C:011FH         LINE#         220
+  C:0121H         LINE#         221
+  C:0123H         LINE#         222
+  C:0125H         LINE#         223
+  C:0127H         LINE#         225
+  C:0128H         LINE#         226
+  C:0129H         LINE#         227
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:53:56  PAGE 5
 
 
-  C:012CH         LINE#         252
-  C:012EH         LINE#         253
-  C:0130H         LINE#         254
-  C:0131H         LINE#         256
-  C:0133H         LINE#         258
-  C:0136H         LINE#         259
-  C:0138H         LINE#         260
-  C:013AH         LINE#         262
-  C:013CH         LINE#         263
-  C:013DH         LINE#         264
-  C:013FH         LINE#         265
-  C:0141H         LINE#         266
-  C:0144H         LINE#         267
-  C:0147H         LINE#         268
-  C:014AH         LINE#         271
-  C:014CH         LINE#         272
-  C:014EH         LINE#         273
-  C:014FH         LINE#         277
-  C:0151H         LINE#         278
-  C:0152H         LINE#         282
-  C:0155H         LINE#         283
-  C:0157H         LINE#         284
-  C:0159H         LINE#         285
-  C:015BH         LINE#         288
-  C:015EH         LINE#         289
-  C:0160H         LINE#         290
-  C:0162H         LINE#         291
-  C:0164H         LINE#         293
-  C:0166H         LINE#         297
-  C:0168H         LINE#         298
-  C:016AH         LINE#         301
-  C:016CH         LINE#         302
-  C:016EH         LINE#         303
-  C:016FH         LINE#         304
-  C:0171H         LINE#         307
-  C:0174H         LINE#         308
-  C:0176H         LINE#         309
-  C:0177H         LINE#         310
-  C:0179H         LINE#         311
-  C:017BH         LINE#         314
-  C:017DH         LINE#         315
-  C:017FH         LINE#         316
-  C:0181H         LINE#         317
-  C:0184H         LINE#         318
-  C:0186H         LINE#         319
-  C:0189H         LINE#         322
-  C:018BH         LINE#         323
-  C:018DH         LINE#         324
-  C:018FH         LINE#         327
-  C:0191H         LINE#         328
+  C:012BH         LINE#         228
+  C:012DH         LINE#         230
+  C:012FH         LINE#         231
+  C:0131H         LINE#         232
+  C:0133H         LINE#         239
+  C:0135H         LINE#         240
+  C:0137H         LINE#         241
+  C:0139H         LINE#         242
+  C:013BH         LINE#         243
+  C:013CH         LINE#         249
+  C:013EH         LINE#         250
+  C:0140H         LINE#         252
+  C:0142H         LINE#         253
+  C:0144H         LINE#         254
+  C:0145H         LINE#         256
+  C:0147H         LINE#         258
+  C:014AH         LINE#         259
+  C:014CH         LINE#         260
+  C:014EH         LINE#         262
+  C:0150H         LINE#         263
+  C:0151H         LINE#         264
+  C:0153H         LINE#         265
+  C:0155H         LINE#         266
+  C:0158H         LINE#         267
+  C:015BH         LINE#         268
+  C:015EH         LINE#         271
+  C:0160H         LINE#         272
+  C:0162H         LINE#         273
+  C:0163H         LINE#         277
+  C:0165H         LINE#         278
+  C:0166H         LINE#         282
+  C:0169H         LINE#         283
+  C:016BH         LINE#         284
+  C:016DH         LINE#         285
+  C:016FH         LINE#         288
+  C:0172H         LINE#         289
+  C:0174H         LINE#         290
+  C:0176H         LINE#         291
+  C:0178H         LINE#         293
+  C:017AH         LINE#         297
+  C:017CH         LINE#         298
+  C:017EH         LINE#         301
+  C:0180H         LINE#         302
+  C:0182H         LINE#         303
+  C:0183H         LINE#         304
+  C:0185H         LINE#         307
+  C:0188H         LINE#         308
+  C:018AH         LINE#         309
+  C:018BH         LINE#         310
+  C:018DH         LINE#         311
+  C:018FH         LINE#         314
+  C:0191H         LINE#         315
+  C:0193H         LINE#         316
+  C:0195H         LINE#         317
+  C:0198H         LINE#         318
+  C:019AH         LINE#         319
+  C:019DH         LINE#         322
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:53:56  PAGE 6
+
+
+  C:019FH         LINE#         323
+  C:01A1H         LINE#         324
+  C:01A3H         LINE#         327
+  C:01A5H         LINE#         328
   -------         ENDMOD        JOGO
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0176H BYTE (18%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 018AH BYTE (19%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=374
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  16:48:13  PAGE 6
-
-
+Program Size: data=8.0 xdata=0 code=394
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
