@@ -5,6 +5,7 @@
 ; Cláudio Ascenso Sardinha, 2030215
 ;*******************************************************************************
 
+;*******************************************************************************
 ;	Portas
 INPUT EQU P3
 DisplayX EQU P2
@@ -58,31 +59,32 @@ CSEG AT 0003h
 JMP MoverJogadorEsquerda
 ;*******************************************************************************
 ;*******************************************************************************
-; Rotina de tratamento da interrupção do temporizador 0
-CSEG AT 000bh
-JMP VerificarObstaculos
-;*******************************************************************************
-;*******************************************************************************
 ; Rotina de tratamento da interrupção externa 1 (botão seguinte) 
 CSEG AT 0013h
 JMP MoverJogadorDireita
+;*******************************************************************************
+; Rotina de tratamento da interrupção do temporizador 0
+CSEG AT 000bh
+JMP VerificarObstaculos
 ;*******************************************************************************
 ;*******************************************************************************
 ; Rotina de tratamento da interrupção do temporizado 1
 CSEG AT 001bh
 JMP VarrerDisplay
 ;***************************************************************************
+;***************************************************************************
+
 ;*******************************************************************************
 ; Instruções do programa principal
 CSEG AT 050h
 Principal:
     MOV SP, #100			; Endereço inicial da stack pointer
     MOV NivelAtual, #NIVEL_INICIAL			; Imagem inicial
+    MOV TempoObstaculos, #0
     MOV LinhaAtual, #0			; Mostrar a primeira linha no display
     MOV VidasRestantes, #VIDAS_INICIAL
     MOV LinhaAtiva, #LINHAATIVA_INICIAL
-    MOV TempoObstaculos, #0
-    
+
     LigarInterrupcoes:
         MOV TMOD, #00100001b;		; Timer 0 de 16 bits
         MOV TH0, #TEMPO_HIGH;		; Timer 0 = 50 ms
@@ -98,7 +100,6 @@ Principal:
         MOV INPUT, #VAZIO			; P3 é uma porta de entrada
 
     Principal_Jogo:
-        
         MOV DificuldadeAtual, #DIFICULDADE1
         CALL Jogar
         
@@ -156,6 +157,7 @@ MoverJogadorEsquerda:
 	PUSH ACC
 	PUSH B
 	PUSH 0
+    
 	MOV A,#POS_JOGADOR
 	MOV B,#ImagemX
 	ADD A,B
@@ -213,8 +215,7 @@ VerificarObstaculos:
     DJNZ TempoObstaculos, fimVerificarObstaculos
     
     ReinicializarDificuldade:
-        MOV R0, DificuldadeAtual
-        MOV TempoObstaculos, R0
+        MOV TempoObstaculos, DificuldadeAtual
         
     VerificarColisoes:
 		MOV A, #ImagemX
@@ -228,12 +229,15 @@ VerificarObstaculos:
         MOV B, @R0
 		
 		ANL A, B
-		JZ MoverObstaculos		
-		DEC VidasRestantes
+		JZ MoverObstaculos
+        
+        DecrementarVidas:
+        DEC VidasRestantes
 
 	MoverObstaculos:
-		;;
-		;;
+;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
 		
 FimVerificarObstaculos:
     POP B
@@ -294,8 +298,7 @@ EndLoop: JMP EndLoop
 ;*******************************************************************************
 ;*******************************************************************************
 Jogar:
-    MOV A, DificuldadeAtual
-    MOV TempoObstaculos, A
+    MOV TempoObstaculos, DificuldadeAtual
     
     InicializarJogador:
         MOV A, #ImagemX		; Apontador para a primeira linha
