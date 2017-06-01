@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        06/01/2017  17:02:08  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/01/2017  17:08:14  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -56,18 +56,17 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   D:0090H         SYMBOL        DISPLAYY
   C:0177H         SYMBOL        ENDLOOP
   C:019BH         SYMBOL        FIMCICLOJOGAR
-  C:01A1H         SYMBOL        FIMJOGAR
   C:0103H         SYMBOL        FIMMOVERJOGADORDIREITA
   C:00E3H         SYMBOL        FIMMOVERJOGADORESQUERDA
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:02:08  PAGE 2
-
-
   C:015DH         SYMBOL        FIMVARRERDISPLAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:08:14  PAGE 2
+
+
   C:0132H         SYMBOL        FIMVERIFICAROBSTACULOS
   C:0165H         SYMBOL        GAMEOVER
   D:00A8H         SYMBOL        IE
   N:002EH         SYMBOL        IMAGEMATUAL
-  N:0046H         SYMBOL        IMAGEMX
+  N:0046H         SYMBOL        IMAGEMDISPLAY
   N:0005H         SYMBOL        IMAGEM_GAMEOVER
   N:0006H         SYMBOL        IMAGEM_VICTORY
   C:01A4H         SYMBOL        IMAGENS
@@ -104,6 +103,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   N:0004H         SYMBOL        POS_JOGADOR_INICIAL
   C:0050H         SYMBOL        PRINCIPAL
   C:0082H         SYMBOL        PRINCIPAL_JOGO
+  C:01A1H         SYMBOL        PROXIMONIVEL
   C:011BH         SYMBOL        REINICIALIZARDIFICULDADE
   D:0081H         SYMBOL        SP
   N:002AH         SYMBOL        TEMPOOBSTACULOS
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   B:0088H.6       SYMBOL        TR1
   C:013BH         SYMBOL        VARRERDISPLAY
   N:00FFH         SYMBOL        VAZIO
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:02:08  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:08:14  PAGE 3
 
 
   C:011EH         SYMBOL        VERIFICARCOLISOES
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:00B9H         LINE#         141
   C:00BAH         LINE#         142
   C:00BBH         LINE#         143
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:02:08  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:08:14  PAGE 4
 
 
   C:00BCH         LINE#         144
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:0126H         LINE#         226
   C:0127H         LINE#         227
   C:0128H         LINE#         228
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:02:08  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:08:14  PAGE 5
 
 
   C:012AH         LINE#         229
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Jogo (JOGO)
   C:0198H         LINE#         322
   C:019BH         LINE#         325
   C:019DH         LINE#         326
-BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:02:08  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/01/2017  17:08:14  PAGE 6
 
 
   C:019FH         LINE#         327

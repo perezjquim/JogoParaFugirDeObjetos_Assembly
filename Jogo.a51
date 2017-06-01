@@ -47,7 +47,7 @@ NivelAtual EQU 45						; Nível atual do jogo (que representa a imagem do vetor a
 ImagemAtual EQU 46
 LinhaAtiva EQU 47
 NovaImagem EQU 50
-ImagemX EQU 70  						; Display com 7 valores
+ImagemDisplay EQU 70  						; Display com 7 valores
 ;*******************************************************************************
 ; Primeira instrução, após o reset do microcontrolador 
 CSEG AT 0000h
@@ -130,7 +130,7 @@ DesenharNovaImagem:
     MOV B, #NR_LINHAS			; Número de linhas
     DEC B
     MUL AB				; Multiplica a imagem pelo tamanho da linha
-    MOV R0, #ImagemX		; R0 aponta para o display
+    MOV R0, #ImagemDisplay		; R0 aponta para o display
     MOV R1, A			; Guarda o deslocamento
     MOV R2, #NR_LINHAS		; Número de linhas do display
     DEC R2
@@ -159,7 +159,7 @@ MoverJogadorEsquerda:
 	PUSH 0
     
 	MOV A,#POS_JOGADOR
-	MOV B,#ImagemX
+	MOV B,#ImagemDisplay
 	ADD A,B
 	MOV R0,A 
 	MOV A,@R0					;Posição do joagador 
@@ -183,7 +183,7 @@ MoverJogadorDireita:
 	PUSH 0
 
 	MOV A,#POS_JOGADOR
-	MOV B,#ImagemX
+	MOV B,#ImagemDisplay
 	ADD A,B
 	MOV R0,A 
 	MOV A,@R0					;Posição do joagador 
@@ -218,7 +218,7 @@ VerificarObstaculos:
         MOV TempoObstaculos, DificuldadeAtual
         
     VerificarColisoes:
-		MOV A, #ImagemX
+		MOV A, #ImagemDisplay
 		ADD A, #POS_JOGADOR
         MOV B, A
         DEC B
@@ -253,7 +253,7 @@ VarrerDisplay:
     PUSH ACC			; Guarda o conteúdo do registo A
     PUSH 0				; Guarda o conteúdo do registo R0
 
-	MOV A, #ImagemX		; Apontador para a primeira linha
+	MOV A, #ImagemDisplay		; Apontador para a primeira linha
 	ADD A, LinhaAtual			; Apontador para a linha a mostrar no display
 	MOV R0, A			; Apontador para a linha do display
     
@@ -301,7 +301,7 @@ Jogar:
     MOV TempoObstaculos, DificuldadeAtual
     
     InicializarJogador:
-        MOV A, #ImagemX		; Apontador para a primeira linha
+        MOV A, #ImagemDisplay		; Apontador para a primeira linha
         ADD A, #POS_JOGADOR			; Apontador para a linha a mostrar no display
         MOV R0, A
         MOV @R0, #POS_JOGADOR_INICIAL 
@@ -323,10 +323,10 @@ Jogar:
         
     fimCicloJogar:    
         MOV A, VidasRestantes
-        JNZ FimJogar
+        JNZ ProximoNivel
         JMP GameOver
     
-    fimJogar:
+    ProximoNivel:
         INC NivelAtual
         RET
 ;*******************************************************************************

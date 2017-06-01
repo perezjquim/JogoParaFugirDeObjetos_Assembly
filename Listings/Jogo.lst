@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     1
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -107,7 +107,7 @@ LOC  OBJ            LINE     SOURCE
   0029                42     VidasRestantes EQU 41                   ; Vidas restantes do jogador
 
   002A                43     TempoObstaculos EQU 42          ; Tempo (restante) antes de descerem (novamente) os obstácu
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     2
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     2
 
                              los
 
@@ -125,7 +125,7 @@ LOC  OBJ            LINE     SOURCE
 
   0032                49     NovaImagem EQU 50
 
-  0046                50     ImagemX EQU 70                                                  ; Display com 7 valores
+  0046                50     ImagemDisplay EQU 70                                            ; Display com 7 valores
 
                       51     ;*******************************************************************************
 
@@ -239,7 +239,7 @@ LOC  OBJ            LINE     SOURCE
 
 0087 752B12          106             MOV DificuldadeAtual, #DIFICULDADE2
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     3
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     3
 
 008A 3179            107             CALL Jogar
 
@@ -293,7 +293,7 @@ LOC  OBJ            LINE     SOURCE
 
 00AE A4              132         MUL AB                              ; Multiplica a imagem pelo tamanho da linha
 
-00AF 7846            133         MOV R0, #ImagemX            ; R0 aponta para o display
+00AF 7846            133         MOV R0, #ImagemDisplay              ; R0 aponta para o display
 
 00B1 F9              134         MOV R1, A                   ; Guarda o deslocamento
 
@@ -351,7 +351,7 @@ LOC  OBJ            LINE     SOURCE
 
 00D0 7406            161             MOV A,#POS_JOGADOR
 
-00D2 75F046          162             MOV B,#ImagemX
+00D2 75F046          162             MOV B,#ImagemDisplay
 
 00D5 25F0            163             ADD A,B
 
@@ -373,7 +373,7 @@ LOC  OBJ            LINE     SOURCE
 
 00E2 F6              172             MOV @R0,A
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     4
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     4
 
                      173                     
 
@@ -401,7 +401,7 @@ LOC  OBJ            LINE     SOURCE
 
 00F0 7406            185             MOV A,#POS_JOGADOR
 
-00F2 75F046          186             MOV B,#ImagemX
+00F2 75F046          186             MOV B,#ImagemDisplay
 
 00F5 25F0            187             ADD A,B
 
@@ -471,7 +471,7 @@ LOC  OBJ            LINE     SOURCE
 
 011E                 220         VerificarColisoes:
 
-011E 7446            221                     MOV A, #ImagemX
+011E 7446            221                     MOV A, #ImagemDisplay
 
 0120 2406            222                     ADD A, #POS_JOGADOR
 
@@ -507,7 +507,7 @@ LOC  OBJ            LINE     SOURCE
 
                      238     ;;;;;;;;;;;;;;;;
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     5
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     5
 
                      239     ;;;;;;;;;;;;;;;
 
@@ -543,7 +543,7 @@ LOC  OBJ            LINE     SOURCE
 
                      255     
 
-013F 7446            256             MOV A, #ImagemX         ; Apontador para a primeira linha
+013F 7446            256             MOV A, #ImagemDisplay           ; Apontador para a primeira linha
 
 0141 2528            257             ADD A, LinhaAtual                       ; Apontador para a linha a mostrar no displ
                              ay
@@ -640,9 +640,9 @@ LOC  OBJ            LINE     SOURCE
 
 017C                 303         InicializarJogador:
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     6
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     6
 
-017C 7446            304             MOV A, #ImagemX         ; Apontador para a primeira linha
+017C 7446            304             MOV A, #ImagemDisplay           ; Apontador para a primeira linha
 
 017E 2406            305             ADD A, #POS_JOGADOR                     ; Apontador para a linha a mostrar no displ
                              ay
@@ -687,13 +687,13 @@ LOC  OBJ            LINE     SOURCE
 
 019B E529            325             MOV A, VidasRestantes
 
-019D 7002            326             JNZ FimJogar
+019D 7002            326             JNZ ProximoNivel
 
 019F 80C4            327             JMP GameOver
 
                      328         
 
-01A1                 329         fimJogar:
+01A1                 329         ProximoNivel:
 
 01A1 052D            330             INC NivelAtual
 
@@ -734,7 +734,7 @@ LOC  OBJ            LINE     SOURCE
 
                      345     END
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     7
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     7
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -759,7 +759,6 @@ DISPLAYX. . . . . . . . . .  D ADDR   00A0H   A
 DISPLAYY. . . . . . . . . .  D ADDR   0090H   A   
 ENDLOOP . . . . . . . . . .  C ADDR   0177H   A   
 FIMCICLOJOGAR . . . . . . .  C ADDR   019BH   A   
-FIMJOGAR. . . . . . . . . .  C ADDR   01A1H   A   
 FIMMOVERJOGADORDIREITA. . .  C ADDR   0103H   A   
 FIMMOVERJOGADORESQUERDA . .  C ADDR   00E3H   A   
 FIMVARRERDISPLAY. . . . . .  C ADDR   015DH   A   
@@ -767,7 +766,7 @@ FIMVERIFICAROBSTACULOS. . .  C ADDR   0132H   A
 GAMEOVER. . . . . . . . . .  C ADDR   0165H   A   
 IE. . . . . . . . . . . . .  D ADDR   00A8H   A   
 IMAGEMATUAL . . . . . . . .  N NUMB   002EH   A   
-IMAGEMX . . . . . . . . . .  N NUMB   0046H   A   
+IMAGEMDISPLAY . . . . . . .  N NUMB   0046H   A   
 IMAGEM_GAMEOVER . . . . . .  N NUMB   0005H   A   
 IMAGEM_VICTORY. . . . . . .  N NUMB   0006H   A   
 IMAGENS . . . . . . . . . .  C ADDR   01A4H   A   
@@ -802,10 +801,11 @@ P2. . . . . . . . . . . . .  D ADDR   00A0H   A
 P3. . . . . . . . . . . . .  D ADDR   00B0H   A   
 POS_JOGADOR . . . . . . . .  N NUMB   0006H   A   
 POS_JOGADOR_INICIAL . . . .  N NUMB   0004H   A   
-A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:02:08 PAGE     8
-
 PRINCIPAL . . . . . . . . .  C ADDR   0050H   A   
+A51 MACRO ASSEMBLER  JOGO                                                                 06/01/2017 17:08:13 PAGE     8
+
 PRINCIPAL_JOGO. . . . . . .  C ADDR   0082H   A   
+PROXIMONIVEL. . . . . . . .  C ADDR   01A1H   A   
 REINICIALIZARDIFICULDADE. .  C ADDR   011BH   A   
 SP. . . . . . . . . . . . .  D ADDR   0081H   A   
 TEMPOOBSTACULOS . . . . . .  N NUMB   002AH   A   
