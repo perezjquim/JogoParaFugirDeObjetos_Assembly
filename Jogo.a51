@@ -27,11 +27,11 @@ POS_JOGADOR_INICIAL EQU 4								; Posição inicial do jogador (no meio da linha)
 LINHAATIVA_INICIAL EQU 11111110b					; Seleção da primeira linha
 NIVEL_INICIAL EQU 1												; Nível inicial (nível 1)
 VIDAS_INICIAL EQU 4												; Nº de vidas para o jogador (3 vidas)
-DIFICULDADE1 EQU 20											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE2 EQU 18											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE3 EQU 15 											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE4 EQU 10 											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE5 EQU 7  											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE1 EQU 5											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE2 EQU 4											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE3 EQU 3 											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE4 EQU 2 											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE5 EQU 1  											; Velocidade a que descem os obstáculos (dificuldade)
 LIMITE_X_DIREITA EQU 1											;  Limite direito do display em relação ao X
 LIMITE_X_ESQUERDA EQU 16								; Limite esquerdo do display em relação ao X
 LINHA_VAZIA EQU 0													; Representa uma linha vazia (imagem com os LEDs todos desligados)

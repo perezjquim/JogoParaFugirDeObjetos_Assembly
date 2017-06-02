@@ -27,11 +27,11 @@ POS_JOGADOR_INICIAL EQU 4								; Posição inicial do jogador (no meio da linha)
 LINHAATIVA_INICIAL EQU 11111110b					; Seleção da primeira linha
 NIVEL_INICIAL EQU 1												; Nível inicial (nível 1)
 VIDAS_INICIAL EQU 4												; Nº de vidas para o jogador (3 vidas)
-DIFICULDADE1 EQU 20											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE2 EQU 18											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE3 EQU 15 											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE4 EQU 10 											; Velocidade a que descem os obstáculos (dificuldade)
-DIFICULDADE5 EQU 7  											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE1 EQU 5											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE2 EQU 8											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE3 EQU 6 											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE4 EQU 4 											; Velocidade a que descem os obstáculos (dificuldade)
+DIFICULDADE5 EQU 2  											; Velocidade a que descem os obstáculos (dificuldade)
 LIMITE_X_DIREITA EQU 1											;  Limite direito do display em relação ao X
 LIMITE_X_ESQUERDA EQU 16								; Limite esquerdo do display em relação ao X
 LINHA_VAZIA EQU 0													; Representa uma linha vazia (imagem com os LEDs todos desligados)
@@ -280,69 +280,59 @@ VerificarObstaculos:
 		MOV A, #POS_JOGADOR             ;i = POS_JOGADOR -1
 		DEC A
 		
-		FORR:
+		CicloMoverObstaculos:
 			MOV B, ObstaculosInicio
-			CJNE A, B, CicloMoverObstaculos ; (i != ObstaculosInicio)?
-			JMP IFASEGUIR
+			CJNE A, B, MoverObstaculosBaixo ; (i != ObstaculosInicio)?
+			JMP VerificaObstaculosInicio
 		
-		CicloMoverObstaculos:          
-			MOV R1, A
-			
-			MOV A, #ImagemDisplay
-			ADD A, R1
-			;ImagemDisplay[i]
-			
-			MOV B, A
-			DEC B
-			;ImagemDisplay[i-1]
-			
-			MOV R2, A
-			MOV R0, B
-			MOV A, @R0
-			;Valor de ImagemDisplay[i-1]
-			
-			MOV B, R2
-			MOV R0, B
-			;MOV R0, R2
-			
-			MOV @R0, A
-		
-	
-			;Condições do for
-			MOV A, R1
-			DEC A ;i--
+            MoverObstaculosBaixo:          
+                MOV R1, A
+                
+                MOV A, #ImagemDisplay
+                ADD A, R1
+                ;ImagemDisplay[i]
+                
+                MOV B, A
+                DEC B
+                ;ImagemDisplay[i-1]
+                
+                MOV R2, A
+                MOV R0, B
+                MOV A, @R0
+                ;Valor de ImagemDisplay[i-1]
+                
+                MOV B, R2
+                MOV R0, B
+                ;MOV R0, R2
+                
+                MOV @R0, A
             
-			JMP FORR
-
-            
-            
-            
-            
-            
-            
-            
-            
-			 IFASEGUIR:
-             ;o if que vem a seguir
-             MOV A, ObstaculosInicio
-             
-             MOV B, #NR_LINHAS
-             DEC B
-             
-             CJNE A, B, IncrementaObstaculosInicio ; (ObstaculosInicio != NR_LINHAS - 1) ?
-             JMP FimVerificarObstaculos
         
-             IncrementaObstaculosInicio:
-                 MOV A, #ImagemDisplay
-                 ADD A, ObstaculosInicio
-                 MOV R0, A
+                MOV A, R1
+                DEC A ;i--
+                
+                JMP CicloMoverObstaculos
+
+        VerificaObstaculosInicio:
+            MOV A, ObstaculosInicio
+             
+            MOV B, #NR_LINHAS
+            DEC B
+             
+            CJNE A, B, IncrementaObstaculosInicio ; (ObstaculosInicio != NR_LINHAS - 1) ?
+            JMP FimVerificarObstaculos
+    
+            IncrementaObstaculosInicio:
+                MOV A, #ImagemDisplay
+                ADD A, ObstaculosInicio
+                MOV R0, A
                  
-                 MOV A, #LINHA_VAZIA
+                MOV A, #LINHA_VAZIA
                  
-                 MOV @R0, A         ;ImagemDisplay[ObstaculosInicio] = LINHA_VAZIA
-                 MOV A, @R0
+                MOV @R0, A         ;ImagemDisplay[ObstaculosInicio] = LINHA_VAZIA
+                MOV A, @R0
                  
-                 INC ObstaculosInicio   ;ObstaculosInicio++
+                INC ObstaculosInicio   ;ObstaculosInicio++
 		
 FimVerificarObstaculos:
     POP B																				; Repõe o conteúdo do registo B

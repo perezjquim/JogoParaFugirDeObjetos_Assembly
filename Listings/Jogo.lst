@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     1
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -81,26 +81,26 @@ LOC  OBJ            LINE     SOURCE
   0004                29     VIDAS_INICIAL EQU 4                                                                        
                                                   ; Nº de vidas para o jogador (3 vidas)
 
-  0014                30     DIFICULDADE1 EQU 20                                                                        
+  0005                30     DIFICULDADE1 EQU 5                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  0012                31     DIFICULDADE2 EQU 18                                                                        
+  0004                31     DIFICULDADE2 EQU 4                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  000F                32     DIFICULDADE3 EQU 15                                                                        
+  0003                32     DIFICULDADE3 EQU 3                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  000A                33     DIFICULDADE4 EQU 10                                                                        
+  0002                33     DIFICULDADE4 EQU 2                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
-  0007                34     DIFICULDADE5 EQU 7                                                                         
+  0001                34     DIFICULDADE5 EQU 1                                                                         
                                           ; Velocidade a que descem os obstáculos (dificuldade)
 
   0001                35     LIMITE_X_DIREITA EQU 1                                                                     
                                           ;  Limite direito do display em relação ao X
 
   0010                36     LIMITE_X_ESQUERDA EQU 16                                                                ; L
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     2
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     2
 
                              imite esquerdo do display em relação ao X
 
@@ -220,7 +220,7 @@ LOC  OBJ            LINE     SOURCE
 
                       87             
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     3
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     3
 
                       88                     ; Timer 1 no modo 2 (contador de 8 bits com auto-reload)
 
@@ -280,7 +280,7 @@ LOC  OBJ            LINE     SOURCE
 
                      109             
 
-007F 752B14          110             MOV DificuldadeAtual, #DIFICULDADE1                     ; Muda para a dificuldade d
+007F 752B05          110             MOV DificuldadeAtual, #DIFICULDADE1                     ; Muda para a dificuldade d
                              o nível 1
 
 0082 31AA            111             CALL Jogar                                                                         
@@ -288,7 +288,7 @@ LOC  OBJ            LINE     SOURCE
 
                      112             
 
-0084 752B12          113             MOV DificuldadeAtual, #DIFICULDADE2                     ; Muda para a dificuldade d
+0084 752B04          113             MOV DificuldadeAtual, #DIFICULDADE2                     ; Muda para a dificuldade d
                              o nível 2
 
 0087 31AA            114             CALL Jogar                                                                         
@@ -296,7 +296,7 @@ LOC  OBJ            LINE     SOURCE
 
                      115             
 
-0089 752B0F          116             MOV DificuldadeAtual, #DIFICULDADE3                     ; Muda para a dificuldade d
+0089 752B03          116             MOV DificuldadeAtual, #DIFICULDADE3                     ; Muda para a dificuldade d
                              o nível 3
 
 008C 31AA            117             CALL Jogar                                                                         
@@ -304,7 +304,7 @@ LOC  OBJ            LINE     SOURCE
 
                      118             
 
-008E 752B0A          119             MOV DificuldadeAtual, #DIFICULDADE4                     ; Muda para a dificuldade d
+008E 752B02          119             MOV DificuldadeAtual, #DIFICULDADE4                     ; Muda para a dificuldade d
                              o nível 4
 
 0091 31AA            120             CALL Jogar                                                                         
@@ -312,7 +312,7 @@ LOC  OBJ            LINE     SOURCE
 
                      121                     
 
-0093 752B07          122             MOV DificuldadeAtual, #DIFICULDADE5                     ; Muda para a dificuldade d
+0093 752B01          122             MOV DificuldadeAtual, #DIFICULDADE5                     ; Muda para a dificuldade d
                              o nível 5
 
 0096 31AA            123             CALL Jogar                                                                         
@@ -330,7 +330,7 @@ LOC  OBJ            LINE     SOURCE
 
                      129     ;*******************************************************************************
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     4
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     4
 
                      130     
 
@@ -438,7 +438,7 @@ LOC  OBJ            LINE     SOURCE
 
                      169             
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     5
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     5
 
                      170     ;*******************************************************************************        
 
@@ -550,7 +550,7 @@ LOC  OBJ            LINE     SOURCE
 
                      213             ; Caso o jogador não esteja no limite direito do display,
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     6
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     6
 
                      214             ; Move para a esquerda
 
@@ -667,7 +667,7 @@ LOC  OBJ            LINE     SOURCE
                                                                                           
 
 011F E6              263             MOV A, @R0                                                                         
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     7
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     7
 
                                                                                   ; Busca a imagem da linha do jogador
 
@@ -798,7 +798,7 @@ LOC  OBJ            LINE     SOURCE
 
 0156                 325                 IncrementaObstaculosInicio:
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     8
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     8
 
 0156 7446            326                     MOV A, #ImagemDisplay
 
@@ -914,7 +914,7 @@ LOC  OBJ            LINE     SOURCE
 0185 B40706          373             CJNE A, #NR_LINHAS, FimVarrerDisplay                                    
 
 0188 752800          374             MOV LinhaAtual, #0                                                                 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE     9
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE     9
 
                                                                           
 
@@ -1034,7 +1034,7 @@ LOC  OBJ            LINE     SOURCE
 01AF 2406            425             ADD A, #POS_JOGADOR                                                                
                                                   ; Aponta para a linha do jogador
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    10
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE    10
 
 01B1 F8              426             MOV R0, A
 
@@ -1153,7 +1153,7 @@ LOC  OBJ            LINE     SOURCE
 01F1 0000                    
 01F3 110A040A        476     DB 17,10,4,10,17,0      ; Game over
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    11
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE    11
 
 01F7 1100                    
 01F9 1F1F1F1F        477     DB 31,31,31,31,31,31    ; Vitória
@@ -1165,7 +1165,7 @@ LOC  OBJ            LINE     SOURCE
 
                      480     END
 
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    12
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE    12
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -1181,11 +1181,11 @@ CICLOMOVEROBSTACULOS . . .  C ADDR   012DH   A
 DECREMENTARVIDAS . . . . .  C ADDR   0128H   A   
 DESENHARNOVAIMAGEM . . . .  C ADDR   009AH   A   
 DESLIGARINTERRUPCOES . . .  C ADDR   0193H   A   
-DIFICULDADE1 . . . . . . .  N NUMB   0014H   A   
-DIFICULDADE2 . . . . . . .  N NUMB   0012H   A   
-DIFICULDADE3 . . . . . . .  N NUMB   000FH   A   
-DIFICULDADE4 . . . . . . .  N NUMB   000AH   A   
-DIFICULDADE5 . . . . . . .  N NUMB   0007H   A   
+DIFICULDADE1 . . . . . . .  N NUMB   0005H   A   
+DIFICULDADE2 . . . . . . .  N NUMB   0004H   A   
+DIFICULDADE3 . . . . . . .  N NUMB   0003H   A   
+DIFICULDADE4 . . . . . . .  N NUMB   0002H   A   
+DIFICULDADE5 . . . . . . .  N NUMB   0001H   A   
 DIFICULDADEATUAL . . . . .  N NUMB   002BH   A   
 ENDLOOP. . . . . . . . . .  C ADDR   01A8H   A   
 FIMCICLOJOGAR. . . . . . .  C ADDR   01CCH   A   
@@ -1233,7 +1233,7 @@ P2 . . . . . . . . . . . .  D ADDR   00A0H   A
 P3 . . . . . . . . . . . .  D ADDR   00B0H   A   
 POS_JOGADOR. . . . . . . .  N NUMB   0006H   A   
 POS_JOGADOR_INICIAL. . . .  N NUMB   0004H   A   
-A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:42:40 PAGE    13
+A51 MACRO ASSEMBLER  JOGO                                                                 06/02/2017 00:45:43 PAGE    13
 
 PRINCIPAL. . . . . . . . .  C ADDR   0050H   A   
 PRINCIPAL_JOGO . . . . . .  C ADDR   0079H   A   
